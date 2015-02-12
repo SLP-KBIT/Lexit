@@ -8,10 +8,20 @@ html
     = csrf_meta_tags
   body
     .container
+      - if user_signed_in?
+        = link_to current_user.name, edit_user_registration_path
+        br
+        = link_to 'log_out', destroy_user_session_path, method: :delete
+      - else
+        = link_to 'sign up', new_user_registration_path
+        br
+        = link_to 'log in', new_user_session_path
+
       - if notice
         p.alert.alert-success
-        = notice
+          = notice
       -if alert
         p.alert.alert-danger
-        = alert
+          = alert
+
       = yield
