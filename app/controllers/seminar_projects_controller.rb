@@ -31,6 +31,7 @@ class SeminarProjectsController < ApplicationController
 
   def show
     @seminar_project = SeminarProject.find(params[:id])
+    @entry = current_user.entries.where(seminar_project_id: @seminar_project.id).first
   end
 
   def edit
