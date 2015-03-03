@@ -19,3 +19,8 @@
               = raw project.decorate.description
           td = project.owner.decorate.name
           td = link_to "詳細", seminar_project_path(project), class: "btn btn-primary"
+  - if type == :plan
+    - extra_params = { 'initiate_page' => params[:initiate_page] }
+  - else
+    - extra_params = { 'plan_page' => params[:plan_page] }
+  = paginate projects, param_name: ( type == :plan ? 'plan_page' : 'initiate_page' ), params: extra_params

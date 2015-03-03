@@ -50,5 +50,7 @@ gem 'bootstrap-sass-extras'
 gem 'devise'
 gem 'draper'
 gem 'carrierwave'
+
+gem 'kaminari'
 gem 'cocoon'
 gem 'byebug'
