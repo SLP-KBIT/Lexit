@@ -11,4 +11,6 @@
 #
 
 class SeminarProjectBook < ActiveRecord::Base
+  belongs_to :seminar_project
+  belongs_to :book
 end

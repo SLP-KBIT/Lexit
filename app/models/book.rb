@@ -10,4 +10,6 @@
 #
 
 class Book < ActiveRecord::Base
+  has_many :seminar_project_books
+  has_many :seminar_project, through: :seminar_project_books
 end

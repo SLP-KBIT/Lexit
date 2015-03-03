@@ -26,5 +26,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_many :project
+  has_many :owned_seminar_projects, class_name: 'SeminarProject'
+  has_many :entries
+  has_many :joined_seminar_projects, through: :entries, source: :seminar_project
 end

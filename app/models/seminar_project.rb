@@ -16,4 +16,17 @@
 #
 
 class SeminarProject < ActiveRecord::Base
+  has_many :seminar_project_books, dependent: :destroy
+  has_many :books, through: :seminar_project_books
+  belongs_to :owner, foreign_key: :user_id, class_name: 'User'
+  has_many :entries
+  has_many :participants, through: :entries, source: :user
+  
+  scope :is_initiate, -> { where( project_status: ProjectStatus::INITIATE ) }
+  scope :is_plan, -> { where( project_status: ProjectStatus::PLANNING ) }
+
+  module ProjectStatus
+    INITIATE = 0
+    PLANNING = 100
+  end
 end
