@@ -1,5 +1,8 @@
 class SeminarProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :load_seminar_project
+  before_action :check_owner, only: [:edit, :update]
+
   def index
   end
 
@@ -19,21 +22,20 @@ class SeminarProjectsController < ApplicationController
   end
 
   def show
-    @seminar_project = SeminarProject.find(params[:id])
   end
 
   def edit
-    @seminar_project = SeminarProject.find(params[:id])
+    redirect_to root_path unless @seminar_project
   end
 
   def update
-    seminar_project = SeminarProject.find(params[:id])
-    seminar_project.update_attributes(seminar_project_params)
+    redirect_to root_path unless @seminar_project
+    @seminar_project.update_attributes(seminar_project_params)
 
     book = find_or_create_book(params[:isbn], params[:book_name])
-    seminar_project.first_book = book
+    @seminar_project.first_book = book
 
-    redirect_to seminar_project_path(seminar_project)
+    redirect_to seminar_project_path(@seminar_project)
   end
 
   private
@@ -49,5 +51,14 @@ class SeminarProjectsController < ApplicationController
       book.save!
     end
     book
+  end
+
+  def load_seminar_project
+    @seminar_project = SeminarProject.find(params[:id]) unless params[:id].blank?
+  end
+
+  def check_owner
+    return unless @seminar_project
+    @seminar_project = nil unless @seminar_project.user_id == current_user.id
   end
 end
