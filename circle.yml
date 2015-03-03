@@ -1,4 +1,6 @@
 test:
-    override:
-      - "bundle exec bin/rubocop_parallel": { parallel: true }
-
+  override:
+    - "bundle exec bin/rubocop_parallel": { parallel: true }
+machine:
+  ruby:
+    version: 2.1.1-p76
