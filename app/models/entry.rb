@@ -11,4 +11,6 @@
 #
 
 class Entry < ActiveRecord::Base
+  belongs_to :seminar_project
+  belongs_to :user
 end

@@ -16,4 +16,9 @@
 #
 
 class SeminarProject < ActiveRecord::Base
+  has_many :seminar_project_books, dependent: :destroy
+  has_many :books, through: :seminar_project_books
+  belongs_to :owner, foreign_key: :user_id, class_name: 'User'
+  has_many :entries
+  has_many :participants, through: :entries, source: :user
 end
