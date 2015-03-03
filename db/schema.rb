@@ -11,10 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150219080654) do
+ActiveRecord::Schema.define(version: 20150303055308) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "books", force: true do |t|
+    t.string   "isbn"
+    t.text     "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "entries", force: true do |t|
+    t.integer  "user_id",                        null: false
+    t.integer  "seminar_project_id",             null: false
+    t.integer  "entry_type",         default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "projects", force: true do |t|
     t.string   "title"
@@ -23,6 +38,27 @@ ActiveRecord::Schema.define(version: 20150219080654) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "status"
+  end
+
+  create_table "seminar_project_books", force: true do |t|
+    t.integer  "book_id",                        null: false
+    t.integer  "seminar_project_id",             null: false
+    t.integer  "relation_type",      default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seminar_projects", force: true do |t|
+    t.text     "title"
+    t.text     "description"
+    t.text     "target"
+    t.text     "genre"
+    t.integer  "project_status", default: 0, null: false
+    t.integer  "data_status",    default: 0, null: false
+    t.integer  "user_id",                    null: false
+    t.text     "promotion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "sessions", force: true do |t|
@@ -35,7 +71,7 @@ ActiveRecord::Schema.define(version: 20150219080654) do
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
-    t.string   "name",                   default: "", null: false
+    t.string   "login_name",             default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -46,10 +82,13 @@ ActiveRecord::Schema.define(version: 20150219080654) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "real_name"
+    t.string   "nick_name"
+    t.string   "student_code"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["name"], name: "index_users_on_name", unique: true, using: :btree
+  add_index "users", ["login_name"], name: "index_users_on_login_name", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
