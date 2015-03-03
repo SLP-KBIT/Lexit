@@ -1,0 +1,19 @@
+h1 輪講プロジェクト発議
+
+= form_for @seminar_project do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :description
+    = f.text_area :description, class: "form-control"
+  .form-group
+    = f.label :target
+    = f.text_field :target, class: "form-control"
+  .form-group
+    = f.label :genre
+    = f.text_field :genre, class: "form-control"
+  .form-group
+    = f.label :promotion
+    = f.text_area :promotion, class: "form-control"
+  = f.submit "作成"
