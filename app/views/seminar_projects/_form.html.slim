@@ -10,7 +10,7 @@
     = text_field_tag :isbn, seminar_project.decorate.isbn, class: "form-control"
   .form-group
     = f.label :book_name
-    = text_field_tag :book_name,seminar_project.decorate.book_name, class: "form-control"
+    = text_field_tag :book_name,seminar_project.decorate.book_name(empty: true), class: "form-control"
   .form-group
     = f.label :target
     = f.text_field :target, class: "form-control"

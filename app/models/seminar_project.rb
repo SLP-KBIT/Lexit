@@ -34,4 +34,15 @@ class SeminarProject < ActiveRecord::Base
     return true if user == owner
     false
   end
+
+  def first_book=(book)
+    first_book = seminar_project_books.first
+    if first_book
+      first_book.book_id = book.id
+    else
+      first_book = SeminarProjectBook.new(book_id: book.id, seminar_project_id: id)
+      first_book.relation_type = SeminarProjectBook::RelationType::MAIN
+    end
+    first_book.save!
+  end
 end
