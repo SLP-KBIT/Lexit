@@ -22,8 +22,8 @@ class SeminarProject < ActiveRecord::Base
   has_many :entries
   has_many :participants, through: :entries, source: :user
 
-  scope :is_initiate, -> { where( project_status: ProjectStatus::INITIATE ) }
-  scope :is_plan, -> { where( project_status: ProjectStatus::PLANNING ) }
+  scope :is_initiate, -> { where(project_status: ProjectStatus::INITIATE) }
+  scope :is_plan, -> { where(project_status: ProjectStatus::PLANNING) }
 
   module ProjectStatus
     INITIATE = 0
@@ -31,7 +31,7 @@ class SeminarProject < ActiveRecord::Base
   end
 
   def owner?(user)
-    return true if user == self.owner
-    return false
+    return true if user == owner
+    false
   end
 end

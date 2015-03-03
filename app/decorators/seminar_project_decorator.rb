@@ -22,13 +22,12 @@ class SeminarProjectDecorator < Draper::Decorator
     if object.books.count > 0
       isbn = object.books.first.name
       if isbn.blank?
-        ""
+        ''
       else
         isbn
       end
     else
-      ""
+      ''
     end
   end
-
 end
