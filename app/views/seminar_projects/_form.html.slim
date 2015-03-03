@@ -1,29 +1,29 @@
 = form_for seminar_project do |f|
   .form-group
-    = f.label :title
+    = f.label :title, '輪講プロジェクトのタイトル'
     = f.text_field :title, class: "form-control"
   .form-group
-    = f.label :description
+    = f.label :description, 'プロジェクト概要'
     = f.text_area :description, class: "form-control"
   .form-group
-    = f.label :isbn
+    = f.label :isbn, '書籍のISBN'
     = text_field_tag :isbn, seminar_project.decorate.isbn, class: "form-control"
   .form-group
-    = f.label :book_name
-    = text_field_tag :book_name,seminar_project.decorate.book_name, class: "form-control"
+    = f.label :book_name, '書籍名'
+    = text_field_tag :book_name,seminar_project.decorate.book_name(empty: true), class: "form-control"
   .form-group
-    = f.label :target
+    = f.label :target, '対象者'
     = f.text_field :target, class: "form-control"
   .form-group
-    = f.label :genre
+    = f.label :genre, 'ジャンル'
     = f.text_field :genre, class: "form-control"
   .form-group
-    = f.label :promotion
+    = f.label :promotion, '勧誘コメント'
     = f.text_area :promotion, class: "form-control"
   - if seminar_project.persisted?
     .form-group
-      = f.label :project_status
-      = f.select :project_status, {"発議" => SeminarProject::ProjectStatus::INITIATE, "計画" => SeminarProject::ProjectStatus::PLANNING }
-    = f.submit "更新"
+      = f.label :project_status, 'プロジェクトの状態'
+      = f.select :project_status, {"発議" => SeminarProject::ProjectStatus::INITIATE, "計画" => SeminarProject::ProjectStatus::PLANNING }, {}, class: 'form-control'
+    = f.submit "更新", class: 'btn btn-primary'
   - else
-    = f.submit "作成"
+    = f.submit "作成", class: 'btn btn-primary'

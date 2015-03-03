@@ -5,16 +5,18 @@ class SeminarProjectDecorator < Draper::Decorator
     object.description.gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/&/, '&amp;').gsub(/\n/, '<br/>')
   end
 
-  def book_name
+  def book_name(empty = false)
     if object.books.count > 0
       name = object.books.first.name
       if name.blank?
-        '書籍名が未設定'
+        return '書籍名が未設定' unless empty
+        ''
       else
         name
       end
     else
-      '書籍が未設定'
+      return '書籍が未設定' unless empty
+      ''
     end
   end
 
