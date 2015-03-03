@@ -9,4 +9,4 @@
     - projects.each do |project|
       td = project.title
       td = project.description
-      td = project.owner.real_name
+      td = project.owner.decorate.name
