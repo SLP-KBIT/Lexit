@@ -52,3 +52,5 @@ gem 'draper'
 gem 'carrierwave'
 
 gem 'kaminari'
+gem 'cocoon'
+gem 'byebug'
