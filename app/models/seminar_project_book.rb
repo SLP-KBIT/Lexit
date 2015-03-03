@@ -13,4 +13,9 @@
 class SeminarProjectBook < ActiveRecord::Base
   belongs_to :seminar_project
   belongs_to :book
+
+  module RelationType
+    MAIN = 0
+    SUB = 1
+  end
 end
