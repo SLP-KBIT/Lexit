@@ -1,6 +1,7 @@
 h1 輪講プロジェクト詳細
 
-= link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
+- if @seminar_project.owner?(current_user)
+  = link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
 
 table.table.table-striped
   tr
