@@ -11,5 +11,9 @@
       - projects.each do |project|
         tr
           td = project.title
-          td = project.description
+          td
+            h2.book-title class=( project.books.count <= 0 || project.books.first.name.blank? ? 'error' : '' )
+              = project.decorate.book_name
+            .description
+              = raw project.decorate.description
           td = project.owner.decorate.name

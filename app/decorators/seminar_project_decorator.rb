@@ -1,13 +1,21 @@
 class SeminarProjectDecorator < Draper::Decorator
   delegate_all
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  def description
+    object.description.gsub(/</, '&lt;').gsub(/>/, '&gt;').gsub(/&/, '&amp;').gsub(/\n/, '<br/>')
+  end
+
+  def book_name
+    if object.books.count > 0
+      name = object.books.first.name
+      if name.blank?
+        '書籍名が未設定'
+      else
+        name
+      end
+    else
+      '書籍が未設定'
+    end
+  end
 
 end
