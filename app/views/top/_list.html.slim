@@ -2,11 +2,14 @@
   p.no-content 指定した輪講情報はありません
 - else
   table.table.table-striped.table-condensed
-    tr
-      th タイトル
-      th 概要
-      th 主催者
-    - projects.each do |project|
-      td = project.title
-      td = project.description
-      td = project.owner.decorate.name
+    thead
+      tr
+        th タイトル
+        th 概要
+        th 主催者
+    tbody
+      - projects.each do |project|
+        tr
+          td = project.title
+          td = project.description
+          td = project.owner.decorate.name
