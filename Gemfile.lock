@@ -34,6 +34,8 @@ GEM
     bcrypt (3.1.9)
     bootstrap-sass (3.3.1.0)
       sass (~> 3.2)
+    bootstrap-sass-extras (0.0.6)
+      rails (>= 3.1.0)
     builder (3.2.2)
     carrierwave (0.10.0)
       activemodel (>= 3.2.0)
@@ -55,6 +57,11 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.2.2)
     hike (1.2.3)
@@ -103,6 +110,7 @@ GEM
     rake (10.4.2)
     rdoc (4.2.0)
       json (~> 1.4)
+    request_store (1.1.0)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
     sass (3.2.19)
@@ -148,9 +156,11 @@ PLATFORMS
 DEPENDENCIES
   annotate
   bootstrap-sass
+  bootstrap-sass-extras
   carrierwave
   coffee-rails (~> 4.0.0)
   devise
+  draper
   jbuilder (~> 2.0)
   jquery-rails
   pg

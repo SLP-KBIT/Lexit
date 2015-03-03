@@ -1,0 +1,21 @@
+h1 輪講一覧
+
+.panel.panel-default.top-panel
+  .panel-heading
+    ul.nav.nav-tabs role="tablist"
+      li
+        a href="#initiate" role="tab" data-toggle="tab" 発議中
+      li
+        a href="#plan" role="tab" data-toggle="tab" 実施中
+      li
+        a href="#past" role="tab" data-toggle="tab" 終了
+  .tab-content
+    .tab-pane#initiate
+      = render 'list', projects: @initiates
+    .tab-pane#plan
+      = render 'list', projects: @plans
+    .tab-pane#past
+
+coffee:
+  $ ->
+    $('.nav-tabs a:first').click()

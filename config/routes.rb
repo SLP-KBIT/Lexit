@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'projects/initiates#index'
+  root 'top#index'
 
   devise_for :users
   namespace :projects do

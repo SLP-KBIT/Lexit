@@ -1,0 +1,12 @@
+- if projects.empty?
+  p.no-content 指定した輪講情報はありません
+- else
+  table.table.table-striped.table-condensed
+    tr
+      th タイトル
+      th 概要
+      th 主催者
+    - projects.each do |project|
+      td = project.title
+      td = project.summary
+      td = project.user.name

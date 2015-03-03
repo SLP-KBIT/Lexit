@@ -46,5 +46,7 @@ end
 
 gem 'slim'
 gem 'bootstrap-sass'
+gem 'bootstrap-sass-extras'
 gem 'devise'
+gem 'draper'
 gem 'carrierwave'
