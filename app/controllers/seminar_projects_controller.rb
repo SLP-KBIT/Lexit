@@ -14,7 +14,7 @@ class SeminarProjectsController < ApplicationController
     book = Book.where(isbn: params[:isbn]).first
 
     unless book
-      book = Book.new(isbn:params[:isbn], name: params[:book_name])
+      book = Book.new(isbn: params[:isbn], name: params[:book_name])
       book.save!
     end
     books = seminar_project.books.first
