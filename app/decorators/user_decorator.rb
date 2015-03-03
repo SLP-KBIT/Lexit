@@ -6,5 +6,4 @@ class UserDecorator < Draper::Decorator
     return object.real_name unless object.real_name.blank?
     object.login_name
   end
-
 end

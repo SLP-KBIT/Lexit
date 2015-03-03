@@ -11,10 +11,10 @@ class SeminarProjectsController < ApplicationController
     seminar_project = SeminarProject.new(seminar_project_params)
     seminar_project.user_id = current_user.id
     seminar_project.save!
-    book = Book.where(isbn:params[:isbn]).first
+    book = Book.where(isbn: params[:isbn]).first
 
     unless book
-      book = Book.new(isbn:params[:isbn], name: params[:book_name])
+      book = Book.new(isbn: params[:isbn], name: params[:book_name])
       book.save!
     end
     books = seminar_project.books.first
@@ -26,7 +26,7 @@ class SeminarProjectsController < ApplicationController
     end
     books.save!
 
-    redirect_to seminar_projects_path, alert: {notice: "create new seminar project"}
+    redirect_to seminar_projects_path, alert: { notice: 'create new seminar project' }
   end
 
   def show
@@ -41,9 +41,9 @@ class SeminarProjectsController < ApplicationController
     seminar_project = SeminarProject.find(params[:id])
     seminar_project.update_attributes(seminar_project_params)
 
-    book = Book.where(isbn:params[:isbn]).first
+    book = Book.where(isbn: params[:isbn]).first
     unless book
-      book = Book.new(isbn:params[:isbn], name: params[:book_name])
+      book = Book.new(isbn: params[:isbn], name: params[:book_name])
       book.save!
     end
     seminar_project_books = seminar_project.seminar_project_books.first

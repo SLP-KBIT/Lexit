@@ -13,10 +13,11 @@ Documentation:
   Enabled: false
 
 AllCops:
-  Exclude:
-    - db/schema.rb
-    - config/unicorn.rb
-    - config/unicorn_staging.rb
-    - tmp/**/*
   Include:
-    - app/**/*
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'vendor/bundle/**/*'
