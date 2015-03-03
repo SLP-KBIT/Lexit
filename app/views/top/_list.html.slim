@@ -11,5 +11,5 @@
       - projects.each do |project|
         tr
           td = project.title
-          td = project.description
+          td = raw project.decorate.description
           td = project.owner.decorate.name
