@@ -24,4 +24,6 @@
     .form-group
       = f.label :project_status
       = f.select :project_status, {"発議" => SeminarProject::ProjectStatus::INITIATE, "計画" => SeminarProject::ProjectStatus::PLANNING }
-  = f.submit "作成"
+    = f.submit "更新"
+  - else
+    = f.submit "作成"
