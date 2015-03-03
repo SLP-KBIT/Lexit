@@ -17,3 +17,9 @@
             .description
               = raw project.decorate.description
           td = project.owner.decorate.name
+
+  - if type == :plan
+    - extra_params = { 'initiate_page' => params[:initiate_page] }
+  - else
+    - extra_params = { 'plan_page' => params[:plan_page] }
+  = paginate projects, param_name: ( type == :plan ? 'plan_page' : 'initiate_page' ), params: extra_params

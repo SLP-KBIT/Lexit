@@ -13,9 +13,9 @@ h1 輪講一覧
         a href="#past" role="tab" data-toggle="tab" 終了
   .tab-content
     .tab-pane#initiate
-      = render 'list', projects: @initiates
+      = render 'list', projects: @initiates, type: :initiate
     .tab-pane#plan
-      = render 'list', projects: @plans
+      = render 'list', projects: @plans, type: :plan
     .tab-pane#past
 
 coffee:
