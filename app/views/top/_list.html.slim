@@ -7,13 +7,15 @@
         th タイトル
         th 概要
         th 主催者
+        th
     tbody
       - projects.each do |project|
         tr
-          td = project.title
+          td = link_to project.title, seminar_project_path(project)
           td
             h2.book-title class=( project.books.count <= 0 || project.books.first.name.blank? ? 'error' : '' )
               = project.decorate.book_name
             .description
               = raw project.decorate.description
           td = project.owner.decorate.name
+          td = link_to "詳細", seminar_project_path(project), class: "btn btn-primary"

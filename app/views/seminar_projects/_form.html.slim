@@ -7,10 +7,10 @@
     = f.text_area :description, class: "form-control"
   .form-group
     = f.label :isbn
-    = text_field_tag :isbn,"", class: "form-control"
+    = text_field_tag :isbn, seminar_project.decorate.isbn, class: "form-control"
   .form-group
     = f.label :book_name
-    = text_field_tag :book_name,"", class: "form-control"
+    = text_field_tag :book_name,seminar_project.decorate.book_name, class: "form-control"
   .form-group
     = f.label :target
     = f.text_field :target, class: "form-control"
@@ -20,4 +20,8 @@
   .form-group
     = f.label :promotion
     = f.text_area :promotion, class: "form-control"
+  - if seminar_project.persisted?
+    .form-group
+      = f.label :project_status
+      = f.select :project_status, {"発議" => SeminarProject::ProjectStatus::INITIATE, "計画" => SeminarProject::ProjectStatus::PLANNING }
   = f.submit "作成"

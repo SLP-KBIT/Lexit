@@ -1,0 +1,26 @@
+h1 輪講プロジェクト詳細
+
+= link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
+
+table.table.table-striped
+  tr
+    th タイトル
+    td = @seminar_project.title
+  tr
+    th 主催者
+    td = @seminar_project.owner.decorate.name
+  tr
+    th 対象書籍
+    td = @seminar_project.decorate.book_name
+  tr
+    th 概要
+    td = @seminar_project.decorate.description
+  tr
+    th 対象者
+    td = @seminar_project.target
+  tr
+    th ジャンル
+    td = @seminar_project.genre
+  tr
+    th 勧誘コメント
+    td = @seminar_project.promotion
