@@ -4,8 +4,8 @@ h1 輪講プロジェクト詳細
   = link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
 - else
   .btn-group
-    = button_to '参加する', entries_path, class: "btn btn-info", params: {seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE}, method: :post
-    = button_to '検討する', entries_path, class: "btn btn-primary",params: {seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::THINKING}, method: :post
+    = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
+    = link_to '検討する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::THINKING), class: "btn btn-primary", method: :post
 table.table.table-striped
   tr
     th タイトル
