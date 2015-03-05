@@ -3,9 +3,17 @@ h1 輪講プロジェクト詳細
 - if @seminar_project.owner?(current_user)
   = link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
 - else
-  .btn-group
-    = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
-    = link_to '検討する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::THINKING), class: "btn btn-primary", method: :post
+  - if current_user.participant?(@seminar_project)
+    = link_to '参加をやめる', entry_path(seminar_project_id: @seminar_project), class: "btn btn-danger", method: :delete
+  - elsif current_user.thinking?(@seminar_project)
+    .btn-group
+      = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
+      = link_to '検討をやめる', entry_path(seminar_project_id: @seminar_project), class: "btn btn-danger", method: :delete
+  - else
+    .btn-group
+      = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
+      = link_to '検討する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::THINKING), class: "btn btn-primary", method: :post
+
 table.table.table-striped
   tr
     th タイトル
