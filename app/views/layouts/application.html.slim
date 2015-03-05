@@ -37,6 +37,10 @@ html[lang="en"]
     .container.main
       .row
         .col-md-9
+          - unless flash[:notice].blank?
+            .alert.alert-info = flash[:notice]
+          - unless flash[:alert].blank?
+            .alert.alert-alert = flash[:notice]
           = yield
       footer
         p
