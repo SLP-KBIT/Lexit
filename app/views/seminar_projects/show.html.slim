@@ -1,7 +1,11 @@
 h1 輪講プロジェクト詳細
 
 - if @seminar_project.owner?(current_user)
-  = link_to "編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
+  .btn-group
+    = link_to glyph(:pencil)+" 編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
+    - if @seminar_project.project_status == SeminarProject::ProjectStatus::INITIATE
+      = modal_toggle '確定', dialog: '#chModal', class: "btn btn-primary"
+  = render 'change_modal'
 - else
   - if current_user.participant?(@seminar_project)
     = link_to '参加をやめる', entry_path(seminar_project_id: @seminar_project), class: "btn btn-danger", method: :delete

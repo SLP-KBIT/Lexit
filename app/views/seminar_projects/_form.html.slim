@@ -21,9 +21,6 @@
     = f.label :promotion, '勧誘コメント'
     = f.text_area :promotion, class: "form-control"
   - if seminar_project.persisted?
-    .form-group
-      = f.label :project_status, 'プロジェクトの状態'
-      = f.select :project_status, {"発議" => SeminarProject::ProjectStatus::INITIATE, "計画" => SeminarProject::ProjectStatus::PLANNING }, {}, class: 'form-control'
     = f.submit "更新", class: 'btn btn-primary'
   - else
     = f.submit "作成", class: 'btn btn-primary'

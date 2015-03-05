@@ -39,10 +39,16 @@ class SeminarProjectsController < ApplicationController
     redirect_to seminar_project_path(@seminar_project)
   end
 
+  def determine
+    @seminar_project.project_status = SeminarProject::ProjectStatus::PLANNING
+    @seminar_project.save
+    redirect_to seminar_project_path(@seminar_project), notice: 'プロジェクトを確定しました'
+  end
+
   private
 
   def seminar_project_params
-    params.require(:seminar_project).permit(:title, :description, :target, :genre, :promotion, :project_status)
+    params.require(:seminar_project).permit(:title, :description, :target, :genre, :promotion)
   end
 
   def find_or_create_book(isbn, book_name)

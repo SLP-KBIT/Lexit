@@ -1,0 +1,9 @@
+= form_tag determine_seminar_project_path(@seminar_project) do
+  - modal_body = capture do
+    .form-group
+      = label :seminar_session, :number, '予定セッション数'
+      = number_field :seminar_session, :number
+  = modal_dialog id: 'chModal',
+    header: {show_close: true, title: '輪講プロジェクト確定'},
+    body: modal_body,
+    footer: submit_tag('確定する', class: "btn btn-primary") + content_tag(:button, 'キャンセル', 'data-dismiss' => 'modal', class: "btn btn-default")
