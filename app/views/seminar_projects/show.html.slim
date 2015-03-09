@@ -30,7 +30,7 @@ table.table.table-striped
     td = @seminar_project.decorate.book_name
   tr
     th 概要
-    td = @seminar_project.decorate.description
+    td = raw(@seminar_project.decorate.description)
   tr
     th 対象者
     td = @seminar_project.target

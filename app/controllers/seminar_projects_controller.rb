@@ -18,7 +18,7 @@ class SeminarProjectsController < ApplicationController
     book = find_or_create_book(params[:isbn], params[:book_name])
     seminar_project.first_book = book
 
-    redirect_to seminar_projects_path, alert: { notice: 'create new seminar project' }
+    redirect_to seminar_project_path(seminar_project), alert: { notice: 'create new seminar project' }
   end
 
   def show

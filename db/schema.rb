@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150303055308) do
+ActiveRecord::Schema.define(version: 20150309123723) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,15 +29,6 @@ ActiveRecord::Schema.define(version: 20150303055308) do
     t.integer  "entry_type",         default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "projects", force: true do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.text     "summary"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "status"
   end
 
   create_table "seminar_project_books", force: true do |t|
@@ -61,13 +52,6 @@ ActiveRecord::Schema.define(version: 20150303055308) do
     t.datetime "updated_at"
   end
 
-  create_table "sessions", force: true do |t|
-    t.datetime "date"
-    t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -82,9 +66,9 @@ ActiveRecord::Schema.define(version: 20150303055308) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "real_name"
+    t.string   "real_name",                           null: false
     t.string   "nick_name"
-    t.string   "student_code"
+    t.string   "student_code",                        null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
