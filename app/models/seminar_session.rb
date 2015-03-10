@@ -20,9 +20,9 @@ class SeminarSession < ActiveRecord::Base
   has_many :seminar_sessions
 
   def prepare_preparation
-    return self.preparation if self.preparation
-    prep = self.build_preparation
-    prep.book = { self.seminar_project.books.first.name => false }
+    return preparation if preparation
+    prep = build_preparation
+    prep.book = { seminar_project.books.first.name => false }
     prep.read = { '0章0節' => false }
     prep.note = { '0章0節' => false }
     prep.material = { '章構成' => false, 'レイアウト' => false, '図解' => false }
