@@ -1,1 +1,52 @@
-h1 講義支援
+.seminar-session-container
+  h1 講義支援
+
+  h2 = @seminar_session.title
+
+  .session-container
+    .infobar
+      span
+        | ここにお知らせ等が表示されます。
+    .slide-container
+      .slide-controller
+        .btn.btn-xs 理解
+        .btn.btn-xs 同期の停止
+        .btn.btn-xs コメントする
+        .btn.btn-xs コメントを隠す
+      .slide
+        img src="http://images.slideplayer.com/7/1664387/slides/slide_42.jpg"
+      .comment-container
+        ul
+          li 
+            .comment-info
+              span.id 001
+              span.name 
+                | [川鯉]
+            span.content 思考を習うチャンスもう少し解説がわかりやすかったかもね
+          li
+            .comment-info
+              span.id 002
+              span.name 
+                | [豊田]
+            span.content 
+              | > 多様性なら、ここで勉強したのが分かりやすかったです。参考までに。 http://homepage1.nifty.com/Cavhogehogehogehogehoge/hogehogehoge/hogehoge
+          li
+            .comment-info
+              span.id 003
+              span.name 
+                | [青木] 
+            span.content 
+              | > 説明少なくて、すみません。ここ見たら詳しい説明が。 http://cran.r-project.org/doc/contrib/manuals-jp/R-lang.jp v110.pdf
+          li
+            .comment-info
+              span.id 004
+              span.name 
+                | [熊野]
+            span.content
+              | > ありがとうございます。
+
+    .memo-container
+      textarea
+        | 個人ノート:
+        
+
