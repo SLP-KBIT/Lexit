@@ -57,3 +57,6 @@ gem 'carrierwave'
 gem 'kaminari'
 gem 'cocoon'
 gem 'byebug'
+
+gem 'websocket-rails'
+

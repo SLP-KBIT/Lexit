@@ -67,35 +67,66 @@ $slide-height: 500px
         box-sizing: border-box
         width: 20%
         float: right
-        height: $slide-height
+        height: $slide-height - 20px
+
+        .tab
+          display: block
+          height: 20px
+          .tab-btn
+            display: inline-block
+            padding: 0 6px
+            border: 1px solid #ccc
+            border-left: 0
+            @include border-top-left-radius( 6px )
+            @include border-top-right-radius( 6px )
+            border-bottom: 0
+            line-height: 16px
+            font-size: 12px
+            height: 18px
+            text-align: center
+            &.active
+              background-color: rgb(182, 201, 234)
+              @include text-shadow( 1px 1px white )
 
         ul
-          height: $slide-height
+          height: $slide-height - 20px
           padding-left: 0
+          border-top: 1px solid #ccc
+          margin-bottom: 0
 
-          li
-            padding: 2px 4px
-            display: inline-block
+          &.member
+            display: none
+            li
+              display: block
+              font-size: 13px
+              margin: 2px 4px
+              &.presentator
+                color: rgb(210, 65, 65)
 
-            .comment-info
-              font-size: 10px
-              width: 100%
-              .id
-                padding: 0 4px
-                background-color: black
-                color: white
-                @include border-radius( 12px )
-                margin-right: 4px
-              .name
-                font-size: 12px
-                color: rgb(136, 136, 136)
-
-            .content
-              font-size: 12px
+          &.comment
+            li
+              padding: 2px 4px
               display: inline-block
-              line-height: 15px
-              width: 100%
-              word-break: break-all
+
+              .comment-info
+                font-size: 10px
+                width: 100%
+                .id
+                  padding: 0 4px
+                  background-color: black
+                  color: white
+                  @include border-radius( 12px )
+                  margin-right: 4px
+                .name
+                  font-size: 12px
+                  color: rgb(136, 136, 136)
+
+              .content
+                font-size: 12px
+                display: inline-block
+                line-height: 15px
+                width: 100%
+                word-break: break-all
       
     .memo-container
       line-height: 0

@@ -16,7 +16,10 @@
       .slide
         img src="http://images.slideplayer.com/7/1664387/slides/slide_42.jpg"
       .comment-container
-        ul
+        .tab
+          a.tab-btn.active data-target="comment" コメント
+          a.tab-btn data-target="member" 参加者
+        ul.comment
           li 
             .comment-info
               span.id 001
@@ -44,9 +47,29 @@
                 | [熊野]
             span.content
               | > ありがとうございます。
+        ul.member
+          li.presentator s11g205 川鯉
+          li s07t221 豊田
+          li s06t201 青木
+          li s09t211 熊野
 
     .memo-container
       textarea
         | 個人ノート:
         
 
+
+input type="hidden" name="session_id" value=( @seminar_session.id )
+
+coffee:
+  syncSessionClass.enterSession($('input[name=session_id]').val())
+  $('.tab-btn').on( 'click', ->
+    if $(this).attr('data-target') == 'member'
+      $('ul.member').show()
+      $('ul.comment').hide()
+    else
+      $('ul.member').hide()
+      $('ul.comment').show()
+    $('.tab-btn.active').removeClass('active')
+    $(this).addClass('active')
+  )
