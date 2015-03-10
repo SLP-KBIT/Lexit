@@ -20,4 +20,8 @@ class Preparation < ActiveRecord::Base
   serialize :read
   serialize :note
   serialize :material
+
+  def prep_list
+    { 'book' => book, 'read' => read, 'note' => note, 'material' => material }
+  end
 end

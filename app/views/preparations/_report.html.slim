@@ -1,47 +1,37 @@
 h1 進捗報告ページ
 
-table.table.preparation-table
-  tr
-    th.conpact-cell 文献入手
-    td
-      table.table
-        - @preparation.book.each do |title, flag|
-          - if flag
-            tr.success.conpact-cell
-              td = '完 ' + title
-          - else
-            tr.warning.conpact-cell
-              td = '未 ' + title
-  tr
-    th.conpact-cell 精読
-    td
-      table.table
-        - @preparation.read.each do |part, flag|
-          - if flag
-            tr.success.conpact-cell
-              td = '完 ' + part
-          - else
-            tr.warning.conpact-cell
-              td = '未 ' + part
-  tr
-    th.conpact-cell ノート作成
-    td
-      table.table
-        - @preparation.note.each do |part, flag|
-          - if flag
-            tr.success.conpact-cell
-              td = '完 ' + part
-          - else
-            tr.warning.conpact-cell
-              td = '未 ' + part
-  tr
-    th.conpact-cell 資料作成
-    td
-      table.table
-        - @preparation.material.each do |part, flag|
-          - if flag
-            tr.success.conpact-cell
-              td = '完 ' + part
-          - else
-            tr.warning.conpact-cell
-              td = '未 ' + part
+= form_tag preparation_path, method: :put do
+  table.table.preparation-table
+    tr
+      th.conpact-cell 文献入手
+      td
+        table
+          - @preparation.book.each do |title, flag|
+            tr
+              td
+                label = check_box('book', "#{title}", {checked: flag}, true, false) + ' ' + title
+    tr
+      th.conpact-cell 精読
+      td
+        table
+          - @preparation.read.each do |part, flag|
+            tr
+              td
+                label = check_box('read', "#{part}", {checked: flag}, true, false) + ' ' + part
+    tr
+      th.conpact-cell ノート作成
+      td
+        table
+          - @preparation.note.each do |part, flag|
+            tr
+              td
+                label = check_box('note', "#{part}", {checked: flag}, true, false) + ' ' + part
+    tr
+      th.conpact-cell 資料作成
+      td
+        table
+          - @preparation.material.each do |part, flag|
+            tr
+              td
+                label = check_box('material', "#{part}", {checked: flag}, true, false) + ' ' + part
+  = submit_tag '報告する', class: 'btn btn-primary'

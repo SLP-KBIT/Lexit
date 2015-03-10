@@ -1,4 +1,8 @@
 h1 進捗報告ページ
+- if @preparation.seminar_session.presenter?(current_user)
+  .btn-group
+    = link_to '進捗報告', edit_preparation_path, class: 'btn btn-info'
+    = link_to '項目編集', edit_preparation_list_path, class: 'btn btn-warning'
 
 table.table.preparation-table
   tr

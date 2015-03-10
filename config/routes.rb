@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root to: "top#index"
+  root to: 'top#index'
 
   devise_for :users
   resources :seminar_projects do
@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   resources :seminar_sessions
   resources :preparations
   get 'seminar_sessions/:id/download/:type' => 'seminar_sessions#download', as: 'seminar_session_download'
+  get 'preparations/:id/list/' => 'preparations#edit_list', as: 'edit_preparation_list'
 end
