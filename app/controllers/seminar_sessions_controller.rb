@@ -29,7 +29,7 @@ class SeminarSessionsController < ApplicationController
   end
 
   def session_params
-    params.require(:seminar_session).permit(:seminar_project_id, :date, :user_id, :help, :title)
+    params.require(:seminar_session).permit(:seminar_project_id, :date, :user_id, :help, :title, :slide, :resume, :answer)
   end
 
   def load_project
