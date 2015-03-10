@@ -41,4 +41,9 @@ class SeminarSession < ActiveRecord::Base
   def prepare_preparation!
     prepare_preparation.save!
   end
+
+  def presenter?(user)
+    return true if presenter == user
+    false
+  end
 end

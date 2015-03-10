@@ -19,6 +19,10 @@ class SeminarSessionsController < ApplicationController
     redirect_to seminar_project_path(@seminar_session.seminar_project)
   end
 
+  def download
+    send_file(@seminar_session.resume.path) if params[:type] == 'resume'
+  end
+
   private
 
   def create_with_preparation

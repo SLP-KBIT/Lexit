@@ -1,4 +1,6 @@
+= link_to '戻る', seminar_project_path(id: @preparation.seminar_session.seminar_project.id)
 - if @preparation.seminar_session.presenter?(current_user)
-  render 'report'
+  = render 'report'
 - else
-  render 'browse'
+  = render 'browse'
+= link_to '戻る', seminar_project_path(id: @preparation.seminar_session.seminar_project.id)
