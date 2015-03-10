@@ -7,5 +7,6 @@ Rails.application.routes.draw do
       post :determine
     end
   end
-  resources :entries
+  resources :entries, only: %i(create destroy)
+  resources :comments, only: %i(create destroy)
 end

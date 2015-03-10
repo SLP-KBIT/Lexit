@@ -45,4 +45,8 @@ class SeminarProject < ActiveRecord::Base
     end
     first_book.save!
   end
+
+  def comments
+    Comment.where(target: Comment::Target::PROJECT, target_id: id)
+  end
 end

@@ -16,9 +16,9 @@
 #  last_sign_in_ip        :inet
 #  created_at             :datetime
 #  updated_at             :datetime
-#  real_name              :string(255)
+#  real_name              :string(255)      not null
 #  nick_name              :string(255)
-#  student_code           :string(255)
+#  student_code           :string(255)      not null
 #
 
 class User < ActiveRecord::Base
