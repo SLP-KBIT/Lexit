@@ -8,9 +8,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def name_with_student_code
-    if object.student_code.blank?
-      return name
-    end
+    return name if object.student_code.blank?
     object.student_code + ' ' + name
   end
 end
