@@ -10,6 +10,7 @@
 #  end                :boolean          default(FALSE), not null
 #  created_at         :datetime
 #  updated_at         :datetime
+#  title              :text
 #
 
 class SeminarSession < ActiveRecord::Base
