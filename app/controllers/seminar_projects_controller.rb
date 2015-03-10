@@ -11,15 +11,17 @@ class SeminarProjectsController < ApplicationController
   end
 
   def create
-    seminar_project = SeminarProject.new(seminar_project_params)
-    seminar_project.user_id = current_user.id
-    seminar_project.save!
+    current_user_id = current_user.id
+    seminar_project = SeminarProject.create!(seminar_project_params, user_id: current_user_id)
 
     book = find_or_create_book(params[:isbn], params[:book_name])
     seminar_project.first_book = book
 
-    entry = Entry.new(seminar_project_id: seminar_project.id, user_id: current_user.id, entry_type: Entry::EntryType::PARTICIPATE)
-    entry.save!
+    Entry.create!(
+      seminar_project_id: seminar_project.id,
+      user_id: current_user_id,
+      entry_type: Entry::EntryType::PARTICIPATE
+    )
 
     redirect_to seminar_project_path(seminar_project), alert: { notice: 'create new seminar project' }
   end
