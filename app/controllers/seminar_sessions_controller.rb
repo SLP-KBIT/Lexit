@@ -38,6 +38,6 @@ class SeminarSessionsController < ApplicationController
 
   def load_session
     @seminar_session = SeminarSession.find(params[:id]) unless params[:id].blank?
-    @seminar_session.prepare_preparation!
+    @seminar_session.prepare_preparation! if @seminar_session
   end
 end
