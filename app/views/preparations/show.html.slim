@@ -1,1 +1,47 @@
 h1 進捗報告ページ
+
+table.table.preparation-table
+  tr
+    th.conpact-cell 文献入手
+    td
+      table.table
+        - @preparation.book.each do |title, flag|
+          - if flag
+            tr.success.conpact-cell
+              td = '完 ' + title
+          - else
+            tr.warning.conpact-cell
+              td = '未 ' + title
+  tr
+    th.conpact-cell 精読
+    td
+      table.table
+        - @preparation.read.each do |part, flag|
+          - if flag
+            tr.success.conpact-cell
+              td = '完 ' + part
+          - else
+            tr.warning.conpact-cell
+              td = '未 ' + part
+  tr
+    th.conpact-cell ノート作成
+    td
+      table.table
+        - @preparation.note.each do |part, flag|
+          - if flag
+            tr.success.conpact-cell
+              td = '完 ' + part
+          - else
+            tr.warning.conpact-cell
+              td = '未 ' + part
+  tr
+    th.conpact-cell 資料作成
+    td
+      table.table
+        - @preparation.material.each do |part, flag|
+          - if flag
+            tr.success.conpact-cell
+              td = '完 ' + part
+          - else
+            tr.warning.conpact-cell
+              td = '未 ' + part

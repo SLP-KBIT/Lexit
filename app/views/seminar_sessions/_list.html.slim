@@ -12,6 +12,6 @@ h2 セッション一覧
           th 日程
           td = s.decorate.date
         tr
-          td = link_to '準備状況', preparation_path(id: s.id), class: 'btn btn-primary'
+          td = link_to '準備状況', preparation_path(id: s.preparation.id), class: 'btn btn-primary'
         tr
           td = link_to 'セッション開始', seminar_session_path(s), class: 'btn btn-info'

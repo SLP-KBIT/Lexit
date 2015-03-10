@@ -42,10 +42,10 @@ ActiveRecord::Schema.define(version: 20150310063147) do
 
   create_table "preparations", force: true do |t|
     t.integer  "seminar_session_id",             null: false
-    t.json     "book",                           null: false
-    t.json     "read",                           null: false
-    t.json     "note",                           null: false
-    t.json     "material",                       null: false
+    t.string   "book",                           null: false
+    t.string   "read",                           null: false
+    t.string   "note",                           null: false
+    t.string   "material",                       null: false
     t.integer  "practice",           default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
