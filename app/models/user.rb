@@ -40,4 +40,10 @@ class User < ActiveRecord::Base
     return false if entries.is_thinking.where(seminar_project_id: seminar_project.id).blank?
     true
   end
+
+  def schema
+    {
+      name: decorate.name
+    }
+  end
 end
