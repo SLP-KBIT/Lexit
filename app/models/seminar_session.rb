@@ -11,9 +11,18 @@
 #  created_at         :datetime
 #  updated_at         :datetime
 #  title              :text
+#  slide              :string(255)
+#  resume             :string(255)
+#  answer             :string(255)
+#  slide_status_json  :text
+#  resume_status_json :text
+#  answer_status_json :text
 #
 
 class SeminarSession < ActiveRecord::Base
+  mount_uploader :slide, DocumentUploader
+  mount_uploader :resume, DocumentUploader
+  mount_uploader :answer, DocumentUploader
   has_one :preparation
   belongs_to :seminar_project
   belongs_to :presenter, foreign_key: :user_id, class_name: User
