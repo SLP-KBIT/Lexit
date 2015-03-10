@@ -11,4 +11,5 @@ Rails.application.routes.draw do
   resources :comments, only: %i(create destroy)
   resources :seminar_sessions
   resources :preparations
+  get 'seminar_sessions/:id/download/:type' => 'seminar_sessions#download', as: 'seminar_session_download'
 end

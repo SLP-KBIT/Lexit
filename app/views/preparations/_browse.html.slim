@@ -45,3 +45,7 @@ table.table.preparation-table
           - else
             tr.warning.conpact-cell
               td = '未 ' + part
+        - unless @preparation.seminar_session.resume.blank?
+          tr
+            td
+              = link_to '資料ダウンロード', seminar_session_download_path(id: @preparation.seminar_session.id, type: 'resume')
