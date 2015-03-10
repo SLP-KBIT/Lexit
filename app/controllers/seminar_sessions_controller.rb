@@ -3,8 +3,10 @@ class SeminarSessionsController < ApplicationController
   end
 
   def create
-    create_with_preparation
-    redirect_to seminar_project_path(id: session_params[:seminar_project_id])
+    seminar_project = SeminarProject.find(params[:seminar_project_id])
+    s = seminar_project.seminar_sessions.build
+    s.save!
+    redirect_to seminar_project_path(seminar_project)
   end
 
   private

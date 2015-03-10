@@ -1,5 +1,5 @@
 h2 セッション一覧
-= button_to
+= button_to '追加', seminar_sessions_path, class: 'btn btn-primary', params: { seminar_project_id: @seminar_project.id }
 - @seminar_project.seminar_sessions.each.with_index(1) do |s, i|
   .panel.panel-info
     .panel-heading "第#{i}回"
@@ -12,4 +12,6 @@ h2 セッション一覧
           th 日程
           td = s.decorate.date
         tr
-          td = linkt_to '準備状況', seminar_session_path(s), class: 'btn btn-primary'
+          td = link_to '準備状況', preparation_path(id: s.id), class: 'btn btn-primary'
+        tr
+          td = link_to 'セッション開始', seminar_session_path(s), class: 'btn btn-info'
