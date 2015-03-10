@@ -1,4 +1,6 @@
 class SeminarSessionsController < ApplicationController
+  before_action :get_seminar_session
+
   def show
   end
 
@@ -9,7 +11,11 @@ class SeminarSessionsController < ApplicationController
     redirect_to seminar_project_path(seminar_project)
   end
 
-  # private
+  private
+
+  def get_seminar_session
+    @seminar_session = SeminarSession.find(params[:id]) unless params[:id].blank?
+  end
 
   # def create_with_preparation
   #   seminar_project = SeminarProject.find(session_params[:seminar_project_id])

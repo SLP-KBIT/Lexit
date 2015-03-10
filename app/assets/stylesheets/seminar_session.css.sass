@@ -1,0 +1,117 @@
+@import 'compass'
+
+$slide-height: 500px
+
+.seminar-session-container
+  h1
+    font-size: 24px
+    color: #333
+    border-left: 24px rgb(252, 212, 238) solid
+    padding-left: 10px
+    line-height: 24px
+    margin: 14px 2px 10px 2px
+
+  h2
+    font-size: 18px
+    padding: 4px 8px
+    background-color: #eee
+    @include border-radius( 4px )
+    @include box-shadow( 1px 1px rgb(219, 219, 219) )
+    width: 100%
+    margin: 6px 2px
+
+  .session-container
+    border: 1px solid #ccc
+    @include border-radius( 4px )
+    margin: 0 2px
+    width: 100%
+
+    .infobar
+      border-bottom: 1px solid #ccc
+      padding: 4px 8px
+      font-weight: bold
+      color: rgb(195, 87, 87)
+      background-color: white
+      @include border-top-left-radius( 4px )
+      @include border-top-right-radius( 4px )
+
+    .slide-container
+      width: 100%
+      display: block
+      position: relative
+
+      .slide-controller
+        position: absolute
+        display: inline-block
+        top: 0
+        right: 20%
+        background-color: rgba(255, 255, 255, 0.8)
+        @include border-bottom-left-radius( 6px )
+        @include text-shadow( 1px 1px white)
+
+      .slide
+        width: 80%
+        box-sizing: border-box
+        float: left
+        height: $slide-height
+        text-align: center
+        background-color: black
+        padding: 10px 0
+
+        img 
+          height: $slide-height - 20px
+
+      .comment-container
+        display: inline-block
+        box-sizing: border-box
+        width: 20%
+        float: right
+        height: $slide-height
+
+        ul
+          height: $slide-height
+          padding-left: 0
+
+          li
+            padding: 2px 4px
+            display: inline-block
+
+            .comment-info
+              font-size: 10px
+              width: 100%
+              .id
+                padding: 0 4px
+                background-color: black
+                color: white
+                @include border-radius( 12px )
+                margin-right: 4px
+              .name
+                font-size: 12px
+                color: rgb(136, 136, 136)
+
+            .content
+              font-size: 12px
+              display: inline-block
+              line-height: 15px
+              width: 100%
+              word-break: break-all
+      
+    .memo-container
+      line-height: 0
+      box-sizing: border-box
+      width: 100%
+      textarea
+        font-size: 14px
+        line-height: 16px
+        border-width: 1px 0px 0px
+        border-top-style: solid
+        border-top-color: rgb(204, 204, 204)
+        @include border-bottom-left-radius( 4px )
+        @include border-bottom-right-radius( 4px )
+        width: 100%
+        overflow: scroll
+        margin: 0
+        height: 160px
+        color: white
+        background-color: rgb(69, 69, 69)
+        
