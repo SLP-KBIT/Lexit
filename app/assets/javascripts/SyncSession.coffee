@@ -59,7 +59,7 @@ class @SyncSession
 
 
   onEnter: (e) =>
-    addMember(e.user)
+    addMember(e.user, e.presentator)
 
   onLeave: (e) =>
     removeMember(e.user)
