@@ -1,40 +1,51 @@
 class SeminarSessionsController < ApplicationController
-  before_action :get_seminar_session
+  before_action :load_project, :load_session
 
   def show
   end
 
+  def edit
+  end
+
   def create
-    seminar_project = SeminarProject.find(params[:seminar_project_id])
-    s = seminar_project.seminar_sessions.build
-    s.save!
-    redirect_to seminar_project_path(seminar_project)
+    # s = @seminar_project.seminar_sessions.build
+    # s.save!
+    create_with_preparation
+    redirect_to seminar_project_path(@seminar_project)
+  end
+
+  def update
+    @seminar_session.update(session_params)
+    redirect_to seminar_project_path(@seminar_session.seminar_project)
   end
 
   private
 
-  def get_seminar_session
-    @seminar_session = SeminarSession.find(params[:id]) unless params[:id].blank?
+  def create_with_preparation
+    seminar_session = @seminar_project.seminar_sessions.build
+    preparation = prep_init(seminar_session)
+    preparation.save!
+    seminar_session.save!
   end
 
-  # def create_with_preparation
-  #   seminar_project = SeminarProject.find(session_params[:seminar_project_id])
-  #   seminar_session = seminar_project.seminar_session.build(session_params)
-  #   preparation = prep_init(seminar_session)
-  #   preparation.save!
-  #   seminar_session.save!
-  # end
+  def session_params
+    params.require(:seminar_session).permit(:seminar_project_id, :date, :user_id, :help, :title)
+  end
 
-  # def session_params
-  #   prams.permit(:seminar_session).require(:seminar_project_id, :date, :user_id, :help)
-  # end
+  def prep_init(seminar_session)
+    p = seminar_session.build_preparation
+    p.book = { seminar_session.seminar_project.books.first.name => false }
+    p.read = { '0章0節' => false }
+    p.note = { '0章0節' => false }
+    p.material = { '章構成' => false, 'レイアウト' => false, '図解' => false }
+    p
+  end
 
-  # def prep_init(seminar_session)
-  #   p = seminar_session.build_preparation
-  #   p.book = { seminar_session.book.name => false }
-  #   p.read = { '0章0節' => false }
-  #   p.note = { '0章0節' => false }
-  #   p.material = { '章構成' => false, 'レイアウト' => false, '図解' => false }
-  #   p
-  # end
+  def load_project
+    @seminar_project = SeminarProject.find(params[:seminar_project_id]) unless params[:seminar_project_id].blank?
+  end
+
+  def load_session
+    @seminar_session = SeminarSession.find(params[:id]) unless params[:id].blank?
+  end
 end

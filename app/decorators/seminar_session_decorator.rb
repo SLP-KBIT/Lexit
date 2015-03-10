@@ -20,4 +20,9 @@ class SeminarSessionDecorator < Draper::Decorator
     wday = WDATE[object.date.wday]
     object.date.strftime("%Y.%M.%d(#{wday})")
   end
+
+  def title
+    return 'タイトル未定' if object.title.blank?
+    object.title
+  end
 end

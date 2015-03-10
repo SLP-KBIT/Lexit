@@ -1,0 +1,7 @@
+h1 セッション編集
+
+= form_for @seminar_session do |f|
+  .form-group
+    = f.label :title
+    = f.text_field :title, class: "form-control"
+  = f.submit '更新', class: 'btn btn-primary'
