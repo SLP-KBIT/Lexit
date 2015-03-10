@@ -4,7 +4,14 @@ h1 セッション編集
   .form-group
     = f.label :title
     = f.text_field :title, class: "form-control"
-  .form-group
-    = f.label :slide
-    = f.file_field :slide
+  - if @seminar_session.presenter?(current_user)
+    .form-group
+      = f.label :slide
+      = f.file_field :slide
+    .form-group
+      = f.label :resume
+      = f.file_field :resume
+    .form-group
+      = f.label :answer
+      = f.file_field :answer
   = f.submit '更新', class: 'btn btn-primary'
