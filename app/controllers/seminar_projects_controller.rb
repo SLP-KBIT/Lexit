@@ -45,7 +45,7 @@ class SeminarProjectsController < ApplicationController
 
   def determine
     @seminar_project.project_status = SeminarProject::ProjectStatus::PLANNING
-    @seminar_project.save
+    @seminar_project.save!
     redirect_to seminar_project_path(@seminar_project), notice: 'プロジェクトを確定しました'
   end
 

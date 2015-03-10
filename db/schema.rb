@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310050941) do
+ActiveRecord::Schema.define(version: 20150310063147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +40,17 @@ ActiveRecord::Schema.define(version: 20150310050941) do
     t.datetime "updated_at"
   end
 
+  create_table "preparations", force: true do |t|
+    t.integer  "seminar_session_id",             null: false
+    t.json     "book",                           null: false
+    t.json     "read",                           null: false
+    t.json     "note",                           null: false
+    t.json     "material",                       null: false
+    t.integer  "practice",           default: 0, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "seminar_project_books", force: true do |t|
     t.integer  "book_id",                        null: false
     t.integer  "seminar_project_id",             null: false
@@ -57,6 +68,16 @@ ActiveRecord::Schema.define(version: 20150310050941) do
     t.integer  "data_status",    default: 0, null: false
     t.integer  "user_id",                    null: false
     t.text     "promotion"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "seminar_sessions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "seminar_project_id",                 null: false
+    t.datetime "date"
+    t.boolean  "help",               default: false, null: false
+    t.boolean  "end",                default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

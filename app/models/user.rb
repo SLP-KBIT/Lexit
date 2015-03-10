@@ -29,6 +29,7 @@ class User < ActiveRecord::Base
   has_many :owned_seminar_projects, class_name: 'SeminarProject'
   has_many :entries
   has_many :joined_seminar_projects, through: :entries, source: :seminar_project
+  has_many :seminar_sessions
 
   def participant?(seminar_project)
     return false if entries.is_participant.where(seminar_project_id: seminar_project.id).blank?

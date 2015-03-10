@@ -1,0 +1,78 @@
+h1 輪講プロジェクト詳細
+
+- if @seminar_project.owner?(current_user)
+  .btn-group
+    = link_to glyph(:pencil)+" 編集", edit_seminar_project_path(@seminar_project), class: "btn btn-warning"
+    - if @seminar_project.project_status == SeminarProject::ProjectStatus::INITIATE
+      = modal_toggle '確定', dialog: '#chModal', class: "btn btn-primary"
+  = render 'change_modal'
+- else
+  - if current_user.participant?(@seminar_project)
+    = link_to '参加をやめる', entry_path(seminar_project_id: @seminar_project), class: "btn btn-danger", method: :delete
+  - elsif current_user.thinking?(@seminar_project)
+    .btn-group
+      = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
+      = link_to '検討をやめる', entry_path(seminar_project_id: @seminar_project), class: "btn btn-danger", method: :delete
+  - else
+    .btn-group
+      = link_to '参加する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::PARTICIPATE), class: "btn btn-info", method: :post
+      = link_to '検討する', entries_path(seminar_project_id: @seminar_project.id, entry_type: Entry::EntryType::THINKING), class: "btn btn-primary", method: :post
+
+table.table.table-striped
+  tr
+    th タイトル
+    td = @seminar_project.title
+  tr
+    th 主催者
+    td = @seminar_project.owner.decorate.name
+  tr
+    th 対象書籍
+    td = @seminar_project.decorate.book_name
+  tr
+    th 概要
+    td = raw(@seminar_project.decorate.description)
+  tr
+    th 対象者
+    td = @seminar_project.target
+  tr
+    th ジャンル
+    td = @seminar_project.genre
+  tr
+    th 勧誘コメント
+    td = @seminar_project.promotion
+.row
+  .col-md-6
+    .panel.panel-info
+      .panel-heading 参加者
+      .panel-body
+        table.table
+            - @seminar_project.entries.is_participant.includes(:user).each do |u|
+              tr
+                td.name-cell = u.user.real_name
+                td = u.user.student_code
+  .col-md-6
+    .panel.panel-primary
+      .panel-heading 検討者
+      .panel-body
+        table.table
+          tr
+            - @seminar_project.entries.is_thinking.includes(:user).each do |u|
+              tr
+                td.name-cell = u.user.real_name
+                td = u.user.student_code
+.panel.panel-default
+  .panel-heading コメント
+  .panel-body
+    = form_for @comment do |f|
+      = f.hidden_field :target, value: Comment::Target::PROJECT
+      = f.hidden_field :target_id, value: @seminar_project.id
+      .row
+        .col-md-7
+          .form-group
+            = f.text_field :content, class: "form-control comment-form"
+        = f.submit "投稿", class: "btn btn-default"
+    table.table
+      - @seminar_project.comments.each do |c|
+        tr
+          th.name-cell = c.user.nick_name + " >"
+          td = c.content

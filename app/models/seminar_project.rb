@@ -21,6 +21,7 @@ class SeminarProject < ActiveRecord::Base
   belongs_to :owner, foreign_key: :user_id, class_name: 'User'
   has_many :entries
   has_many :participants, through: :entries, source: :user
+  has_many :seminar_sessions
 
   scope :is_initiate, -> { where(project_status: ProjectStatus::INITIATE) }
   scope :is_plan, -> { where(project_status: ProjectStatus::PLANNING) }
@@ -28,6 +29,16 @@ class SeminarProject < ActiveRecord::Base
   module ProjectStatus
     INITIATE = 0
     PLANNING = 100
+  end
+
+  def initiate?
+    return true if project_status == ProjectStatus::INITIATE
+    false
+  end
+
+  def planning?
+    return true if project_status == ProjectStatus::PLANNING
+    false
   end
 
   def owner?(user)

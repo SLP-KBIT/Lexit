@@ -1,0 +1,15 @@
+h2 セッション一覧
+= button_to
+- @seminar_project.seminar_sessions.each.with_index(1) do |s, i|
+  .panel.panel-info
+    .panel-heading "第#{i}回"
+    .panel-body
+      table.table
+        tr
+          th 発表者
+          td = s.decorate.presenter
+        tr
+          th 日程
+          td = s.decorate.date
+        tr
+          td = linkt_to '準備状況', seminar_session_path(s), class: 'btn btn-primary'

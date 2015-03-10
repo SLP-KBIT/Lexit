@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
   resources :entries, only: %i(create destroy)
   resources :comments, only: %i(create destroy)
+  resources :seminar_sessions
 end
