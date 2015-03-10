@@ -3,7 +3,7 @@ WebsocketRails.setup do |config|
   # Uncomment to override the default log level. The log level can be
   # any of the standard Logger log levels. By default it will mirror the
   # current Rails environment log level.
-  # config.log_level = :debug
+  config.log_level = :debug
 
   # Uncomment to change the default log file path.
   # config.log_path = "#{Rails.root}/log/websocket_rails.log"
@@ -34,7 +34,7 @@ WebsocketRails.setup do |config|
   # when that channel is made private. If you don't wish active
   # subscribers to be removed from a previously public channel
   # when making it private, set the following to true.
-  # config.keep_subscribers_when_private = false
+  config.keep_subscribers_when_private = true
 
   # Set to true if you wish to broadcast channel subscriber_join and
   # subscriber_part events. All subscribers of a channel will be 
