@@ -7,3 +7,21 @@
 
 @removeMember = (user) ->
   $('ul.member li[data-user-id=' + user.id + ']').remove()
+
+
+@slideToNext = ->
+  for img, index in $('.slide img')
+    break if $('.slide img').length - 1 == index
+    if $(img).css('display') != 'none'
+      $(img).addClass('hide')
+      $($('.slide img')[index + 1]).removeClass('hide')
+      break
+
+@slideToPrev = ->
+  for img, index in $('.slide img')
+    continue if 0 == index
+    if $(img).css('display') != 'none'
+      $(img).addClass('hide')
+      $($('.slide img')[index - 1]).removeClass('hide')
+      break
+

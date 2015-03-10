@@ -59,4 +59,4 @@ gem 'cocoon'
 gem 'byebug'
 
 gem 'websocket-rails'
-
+gem 'ruby-filemagic'

@@ -14,7 +14,13 @@
         .btn.btn-xs コメントする
         .btn.btn-xs コメントを隠す
       .slide
-        img src="http://images.slideplayer.com/7/1664387/slides/slide_42.jpg"
+        - slides = JSON.parse(@seminar_session.slide_status_json)
+        - image_path = File.dirname(@seminar_session.slide.url)
+        - i = 0
+        - slides.keys.each do |file|
+          = image_tag image_path + '/pages/' + file, 'data-slide-no' => i, class: (i == 0 ? '' : 'hide')
+          - i += 1
+
       .comment-container
         .tab
           a.tab-btn.active data-target="comment" コメント
