@@ -1,4 +1,7 @@
 class SeminarSessionsController < ApplicationController
+  def show
+  end
+
   def create
     create_with_preparation
     redirect_to seminar_project_path(id: session_params[:seminar_project_id])
