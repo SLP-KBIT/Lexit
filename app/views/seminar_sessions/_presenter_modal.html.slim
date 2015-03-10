@@ -1,0 +1,9 @@
+= form_for seminar_session do |f|
+  -modal_body = capture do
+    p 発表者を選択してください
+    .form-group
+      = f.collection_select :user_id, User.all, :id, :real_name, include_blank: ""
+  = modal_dialog id: "presenterModal#{seminar_session.id}",
+    header: {show_close: true, title: '発表者選択'},
+    body: modal_body,
+    footer: submit_tag('確定する', class: "btn btn-primary") + content_tag(:button, 'キャンセル', 'data-dismiss' => 'modal', class: "btn btn-default")
