@@ -11,7 +11,7 @@ class SeminarSessionsController < ApplicationController
     redirect_to seminar_project_path(@seminar_project)
   end
 
-  private
+  # private
 
   def create_with_preparation
     seminar_session = @seminar_project.seminar_sessions.build
