@@ -13,12 +13,10 @@ class SeminarProjectsController < ApplicationController
   def create
     current_user_id = current_user.id
     seminar_project = SeminarProject.create!(seminar_project_params.merge user_id: current_user_id)
-
-    book = find_or_create_book(params[:isbn], params[:book_name])
-    seminar_project.first_book = book
+    seminar_project.first_book = find_or_create_book(params[:isbn], params[:book_name])
 
     Entry.create!(
-      seminar_project_id: seminar_project.id,
+      seminar_project: seminar_project,
       user_id: current_user_id,
       entry_type: Entry::EntryType::PARTICIPATE
     )
