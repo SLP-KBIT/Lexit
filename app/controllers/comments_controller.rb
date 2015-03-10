@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     comment = Comment.new(comment_params)
     comment.user_id = current_user.id
     comment.save!
-    redirect_to seminar_project_path(id: params[:target_id])
+    redirect_to seminar_project_path(id: comment.target_id)
   end
 
   private
