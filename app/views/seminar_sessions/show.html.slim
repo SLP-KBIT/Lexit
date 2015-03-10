@@ -48,10 +48,10 @@
             span.content
               | > ありがとうございます。
         ul.member
-          li.presentator s11g205 川鯉
-          li s07t221 豊田
-          li s06t201 青木
-          li s09t211 熊野
+          - WebsocketRails['session' + @seminar_session.id.to_s].subscribers.each do |con|
+            - user = User.find(con.user_identifier)
+            li data-user-id=(user.id) class=(@seminar_session.user_id == user.id ? 'presentator' : '')
+              = user.decorate.name_with_student_code
 
     .memo-container
       textarea
@@ -72,4 +72,8 @@ coffee:
       $('ul.comment').show()
     $('.tab-btn.active').removeClass('active')
     $(this).addClass('active')
+  )
+  $(window).on('onbeforeunload page:before-change', ->
+    syncSessionClass.leave()
+    $(window).unbind('onbeforeunload page:before-change')
   )

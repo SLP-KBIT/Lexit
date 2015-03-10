@@ -6,6 +6,7 @@ class @SyncSession
   pool: []
   sessions: []
   connectedSendPool: []
+  currentSessionId: null
 
   constructor: (url, channel) ->
     @dispatcher = new WebSocketRails(url)
@@ -14,8 +15,6 @@ class @SyncSession
   bindEvents: =>
     @dispatcher.bind 'connection_closed', @onDisconnect
     @dispatcher.on_open = @onConnect
-    @dispatcher.bind 'enter', @onEnter
-    @dispatcher.bind 'leave', @onLeave
 
   onDisconnect: =>
     @connected = false
@@ -39,11 +38,13 @@ class @SyncSession
     @sendPool()
 
   enterSession: ( session_id ) =>
+    @currentSessionId = session_id
     return if @sessions[ session_id ]?
     @sessions[ session_id ] = @dispatcher.subscribe_private( 'session' + session_id )
     @sessions[ session_id ].on_success = ( user ) =>
-      @sessions[ session_id ].bind 'enter', @onEnter
-      @sessions[ session_id ].bind 'leave', @onLeave
+      console.log('Connected to session: [' + session_id + ']')
+      @sessions[ session_id ].bind 'notify_enter', @onEnter
+      @sessions[ session_id ].bind 'notify_leave', @onLeave
     @sessions[ session_id ].on_failure = ( reason ) ->
       console.log JSON.stringify( reason )
       if reason.message == 'Unauthorized.'
@@ -58,10 +59,16 @@ class @SyncSession
 
 
   onEnter: (e) =>
-    console.log(e)
+    addMember(e.user, e.presentator)
 
   onLeave: (e) =>
-    console.log(e)
+    removeMember(e.user)
+    if e.user.id == window.user_id
+      @dispatcher.unsubscribe( 'session' + @currentSessionId )
+      @sessions[@currentSessionId] = null
+
+  leave: =>
+    @sessions[@currentSessionId].trigger("notify_leave",{ user: { id: window.user_id } })
 
 
 window.syncSessionClass = new SyncSession(window.location.host + '/websocket')

@@ -43,7 +43,10 @@ class User < ActiveRecord::Base
 
   def schema
     {
-      name: decorate.name
+      id: id,
+      student_code: student_code,
+      name: decorate.name,
+      name_with_student_code: decorate.name_with_student_code
     }
   end
 end
