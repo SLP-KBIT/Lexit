@@ -27,6 +27,13 @@
       break
 
 
+@showSlideController = ->
+  $('.btn-slide-next,.btn-slide-prev').show()
+
+@hideSlideController = ->
+  $('.btn-slide-next,.btn-slide-prev').hide()
+
+
 @toggleCommentList = (show = true) ->
   $('.comment-container').transit({ x: (if show then 0 else '100%') }, 300)
   $('.slide').transit({ width: (if show then '80%' else '100%') }, 300)
@@ -44,3 +51,21 @@
   else
     $('#btn-toggle-comment-input').text('コメントする')
 
+
+@adjustSlideSize = ->
+  return if $('.slide img').length <= 0
+  slide_w = $('.slide img').width()
+  container_w = $('.slide').width()
+  if container_w <= 700
+    slide_h = $('.slide img').height()
+    slide_h = slide_h * ( container_w / slide_w )
+    $('.slide img').width(container_w)
+    $('.slide img').height(slide_h)
+    pad_h = ( $('.slide').outerHeight() - slide_h ) / 2
+    $('.slide').css('padding', pad_h + 'px 0')
+  else
+    $('.slide img').width('auto').height('480px')
+    $('.slide').css('padding', '10px 0')
+
+$(window).on('resize', @adjustSlideSize)
+$(window).on('load page:load', @adjustSlideSize)

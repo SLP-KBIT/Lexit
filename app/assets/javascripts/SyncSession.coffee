@@ -60,6 +60,10 @@ class @SyncSession
 
   onEnter: (e) =>
     addMember(e.user, e.presentator)
+    if e.user.id == window.user_id && e.presentator
+      showSlideController()
+    else
+      hideSlideController()
 
   onLeave: (e) =>
     removeMember(e.user)
