@@ -1,0 +1,66 @@
+= link_to '戻る', preparation_path(@preparation)
+
+h1 準備項目編集
+
+= form_tag update_preparation_list_path do
+  table.table.preparation-table
+    tr
+      th.conpact-cell 文献入手
+      td#book
+        - @preparation.book.keys.each.with_index(1) do |title, i|
+          input[type="text" value="#{title}" name="book#{i}"]
+          br
+        p.btn.delete-btn = glyph(:minus)
+        br
+        a.btn.add-btn =glyph(:plus)
+    tr
+      th.conpact-cell 精読
+      td#read
+        - @preparation.read.keys.each.with_index(1) do |part, i|
+          input[type="text", value="#{part}" name="read#{i}"]
+          br
+        p.btn.delete-btn = glyph(:minus)
+        br
+        a.btn.add-btn =glyph(:plus)
+    tr
+      th.conpact-cell ノート作成
+      td#note
+        - @preparation.note.keys.each.with_index(1) do |part, i|
+          input[type="text", value="#{part}" name="note#{i}"]
+          br
+        p.btn.delete-btn = glyph(:minus)
+        br
+        a.btn.add-btn =glyph(:plus)
+    tr
+      th.conpact-cell 資料作成
+      td#material
+        - @preparation.material.keys.each.with_index(1) do |part, i|
+          input[type="text", value="#{part}" name="material#{i}"]
+          br
+        p.btn.delete-btn#sample = glyph(:minus)
+        br
+        a.btn.add-btn =glyph(:plus)
+  = submit_tag '報告する', class: 'btn btn-primary'
+
+
+= link_to '戻る', preparation_path(@preparation)
+
+javascript:
+  $('.delete-btn').each( function() {
+    $(this).prev().get(0).remove();
+  });
+  $('.add-btn').on('click', function(){
+    var id=$(this).parent().get(0).id;
+    var count = $('#'+id).children('input').length + 1
+    var input = document.createElement('input')
+    input.setAttribute('type', 'text')
+    input.setAttribute('name', 'book' + count)
+    $('#' + id + ' > input:last').after(input)
+    $('#' + id + ' > input:last').before(document.createElement('br'))
+  });
+  $('.delete-btn').on('click', function(){
+    if ( $(this).siblings('input').length > 1 ) {
+      $(this).prev().get(0).remove()
+      $(this).prev().get(0).remove()
+    }
+  });

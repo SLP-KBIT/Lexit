@@ -9,6 +9,9 @@ class PreparationsController < ApplicationController
     redirect_to preparation_path(@preparation)
   end
 
+  def update_list
+  end
+
   private
 
   def load_preparation
