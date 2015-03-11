@@ -46,4 +46,12 @@ class SeminarSession < ActiveRecord::Base
     return true if presenter == user
     false
   end
+
+  def document(type)
+    return nil unless %w(slide resume answer).index(type)
+    return slide if type == 'slide'
+    return resume if type == 'resume'
+    return answer if type == 'answer'
+    nil
+  end
 end

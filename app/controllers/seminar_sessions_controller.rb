@@ -50,9 +50,7 @@ class SeminarSessionsController < ApplicationController
   end
 
   def store_pages(type)
-    file = @seminar_session.slide if type == 'slide'
-    file = @seminar_session.resume if type == 'resume'
-    file = @seminar_session.answer if type == 'answer'
+    file = @seminar_session.document(type)
     return unless file
 
     extracted = false
@@ -67,40 +65,55 @@ class SeminarSessionsController < ApplicationController
         tempfile.binmode
         tempfile.write file.read
         tempfile.close
-        dir_prefix = 'public/uploads/seminar_session/' + type + '/' + @seminar_session.id.to_s + '/pages'
-        unless Dir.exist?(dir_prefix) && Dir.exist?(dir_prefix + '-m') && Dir.exist?(dir_prefix + '-s')
-          logger.debug 'Convert to pdf: ' + tempfile_pdf_path
-          `unoconv -f pdf -T 60 "#{tempfile.path}"`
-          unless Dir.exist?(dir_prefix)
-            Dir.mkdir(dir_prefix, 0755)
-            logger.debug 'Generate thumbnails'
-            `convert -density 300 "#{tempfile_pdf_path}" #{Rails.root}/#{dir_prefix}/%03d.png`
-          end
-          unless Dir.exist?(dir_prefix + '-m')
-            logger.debug 'Generate medium thumbnails'
-            Dir.mkdir(dir_prefix + '-m', 0755)
-            `convert -density 75 "#{tempfile_pdf_path}" #{Rails.root}/#{dir_prefix}-m/%03d.png`
-          end
-          unless Dir.exist?(dir_prefix + '-s')
-            logger.debug 'Generate small thumbnails'
-            Dir.mkdir(dir_prefix + '-s', 0755)
-            `convert -resize 240x "#{tempfile_pdf_path}" #{Rails.root}/#{dir_prefix}-s/%03d.png`
-          end
-        end
+        generate_thumbnails(type, tempfile.path, tempfile_pdf_path)
 
         begin
           File.unlink(tempfile_pdf_path) if File.exist?(tempfile_pdf_path)
-        rescue
         end
-      rescue
+      ensure
         tempfile.unlink
       end
     end
 
     return unless extracted
 
-    # save extracted files information to JSON
-    files = Dir.glob(Rails.root.to_s + '/public/uploads/seminar_session/' + type + '/' + @seminar_session.id.to_s + '/pages/*').sort
+    store_files_status(type)
+  end
+
+  def generate_thumbnails(type, file_path, pdf_path)
+    dir_prefix = "public/uploads/seminar_session/#{ type }/#{ @seminar_session.id }/pages"
+    return if Dir.exist?(dir_prefix) && Dir.exist?(dir_prefix + '-m') && Dir.exist?(dir_prefix + '-s')
+
+    logger.debug "Convert to pdf: #{ pdf_path }"
+    `unoconv -f pdf -T 60 "#{file_path}"`
+    generate_large_thumbnails(pdf_path, dir_prefix)
+    generate_medium_thumbnails(pdf_path, dir_prefix)
+    generate_small_thumbnails(pdf_path, dir_prefix)
+  end
+
+  def generate_large_thumbnails(pdf_path, dir_prefix)
+    return if Dir.exist?(dir_prefix)
+    Dir.mkdir(dir_prefix, 0755)
+    logger.debug 'Generate thumbnails'
+    `convert -density 300 "#{pdf_path}" #{Rails.root}/#{dir_prefix}/%03d.png`
+  end
+
+  def generate_medium_thumbnails(pdf_path, dir_prefix)
+    return if Dir.exist?(dir_prefix + '-m')
+    Dir.mkdir("#{ dir_prefix }-m", 0755)
+    logger.debug 'Generate medium thumbnails'
+    `convert -density 75 "#{pdf_path}" #{Rails.root}/#{dir_prefix}-m/%03d.png`
+  end
+
+  def generate_small_thumbnails(pdf_path, dir_prefix)
+    return if Dir.exist?(dir_prefix + '-s')
+    Dir.mkdir("#{ dir_prefix }-s", 0755)
+    logger.debug 'Generate small thumbnails'
+    `convert -resize 240x "#{pdf_path}" #{Rails.root}/#{dir_prefix}-s/%03d.png`
+  end
+
+  def store_files_status(type)
+    files = Dir.glob("#{ Rails.root }/public/uploads/seminar_session/#{ type }/#{ @seminar_session.id }/pages/*").sort
     files.map! do |file_path|
       File.basename(file_path)
     end
