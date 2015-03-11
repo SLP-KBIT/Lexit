@@ -19,6 +19,12 @@
         - slides.keys.each do |file|
           = image_tag image_path + '/pages/' + file, 'data-slide-no' => i, class: (i == 0 ? '' : 'hide')
           - i += 1
+        a.btn-slide-next
+          = image_tag 'slide-next.png'
+        a.btn-slide-prev
+          = image_tag 'slide-next.png'
+        .slide-info
+          | 1/#{ @seminar_session.decorate.slide_status.count }
       .slide-controller
         .btn.btn-xs 理解
         .btn.btn-xs 同期の停止

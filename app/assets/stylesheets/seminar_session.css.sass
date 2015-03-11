@@ -103,6 +103,33 @@ $slide-height: 500px
         img 
           height: $slide-height - 20px
 
+        .btn-slide-next, .btn-slide-prev
+          display: inline-block
+          position: absolute
+          top: 223px
+          opacity: 0.2
+          cursor: pointer
+          &:focus, &:hover, &:active
+            opacity: 0.8
+          img
+            width: 64px
+            height: 64px
+          &.btn-slide-next
+            right: 20px
+          &.btn-slide-prev
+            left: 20px
+            @include transform(rotate(180deg))
+        
+        .slide-info
+          display: inline-block
+          position: absolute
+          right: 0
+          bottom: 0
+          color: white
+          font-size: 11px
+          margin: 2px 8px
+          font-family: monospace
+
       .comment-container
         overflow: hidden
         display: inline-block
