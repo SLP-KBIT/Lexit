@@ -10,6 +10,9 @@ class PreparationsController < ApplicationController
   end
 
   def update_list
+    byebug
+    @preparation.update(update_list_params)
+    redirect_to preparation_path(@preparation)
   end
 
   private
@@ -33,5 +36,15 @@ class PreparationsController < ApplicationController
         list[column][item] = !(preparation_params[column].nil? || preparation_params[column][item].nil?)
       end
     end
+  end
+
+  def update_list_params
+    list = { 'book' => {}, 'read' => {}, 'note' => {}, 'material' => {} }
+    preparation_params.each do |column, h|
+      h.values.each do |item|
+        list[column][item] = false
+      end
+    end
+    list
   end
 end
