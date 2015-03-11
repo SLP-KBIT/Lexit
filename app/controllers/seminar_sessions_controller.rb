@@ -74,6 +74,12 @@ class SeminarSessionsController < ApplicationController
       ensure
         tempfile.unlink
       end
+    elsif mime == 'application/pdf'
+      extracted = true
+      dir_prefix = "public/uploads/seminar_session/#{ type }/#{ @seminar_session.id }/pages"
+      generate_large_thumbnails(file.current_path, dir_prefix)
+      generate_medium_thumbnails(file.current_path, dir_prefix)
+      generate_small_thumbnails(file.current_path, dir_prefix)
     end
 
     return unless extracted
@@ -94,21 +100,21 @@ class SeminarSessionsController < ApplicationController
   end
 
   def generate_large_thumbnails(pdf_path, dir_prefix)
-    return if Dir.exist?(dir_prefix)
+    FileUtils.rm_rf( dir_prefix ) if Dir.exist?(dir_prefix)
     Dir.mkdir(dir_prefix, 0755)
     logger.debug 'Generate thumbnails'
     `convert -density 300 "#{pdf_path}" #{Rails.root}/#{dir_prefix}/%03d.png`
   end
 
   def generate_medium_thumbnails(pdf_path, dir_prefix)
-    return if Dir.exist?(dir_prefix + '-m')
+    FileUtils.rm_rf( dir_prefix + '-m' ) if Dir.exist?(dir_prefix + '-m')
     Dir.mkdir("#{ dir_prefix }-m", 0755)
     logger.debug 'Generate medium thumbnails'
     `convert -density 75 "#{pdf_path}" #{Rails.root}/#{dir_prefix}-m/%03d.png`
   end
 
   def generate_small_thumbnails(pdf_path, dir_prefix)
-    return if Dir.exist?(dir_prefix + '-s')
+    FileUtils.rm_rf( dir_prefix + '-s' ) if Dir.exist?(dir_prefix + '-s')
     Dir.mkdir("#{ dir_prefix }-s", 0755)
     logger.debug 'Generate small thumbnails'
     `convert -resize 240x "#{pdf_path}" #{Rails.root}/#{dir_prefix}-s/%03d.png`

@@ -10,7 +10,6 @@ class PreparationsController < ApplicationController
   end
 
   def update_list
-    byebug
     @preparation.update(update_list_params)
     redirect_to preparation_path(@preparation)
   end
