@@ -15,8 +15,8 @@ class SeminarSessionsController < ApplicationController
   end
 
   def update
-    store_pages('slide')
     @seminar_session.update(session_params)
+    store_pages!('slide')
     redirect_to seminar_project_path(@seminar_session.seminar_project)
   end
 
@@ -49,9 +49,9 @@ class SeminarSessionsController < ApplicationController
     @seminar_session.prepare_preparation! if @seminar_session
   end
 
-  def store_pages(type)
+  def store_pages!(type)
     file = @seminar_session.document(type)
-    return unless file
+    return if file.blank?
 
     extracted = false
     mime = FileMagic.new(FileMagic::MAGIC_MIME_TYPE).file(file.current_path)
@@ -78,6 +78,7 @@ class SeminarSessionsController < ApplicationController
     return unless extracted
 
     store_files_status(type)
+    @seminar_session.save
   end
 
   def generate_thumbnails(type, file_path, pdf_path)
