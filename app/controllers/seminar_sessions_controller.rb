@@ -56,7 +56,7 @@ class SeminarSessionsController < ApplicationController
     extracted = false
     mime = FileMagic.new(FileMagic::MAGIC_MIME_TYPE).file(file.current_path)
     office_extension = file.current_path.match(/(ppt|pptx|doc|docx|xls|xlsx)$/)
-    if ['application/zip', 'application/vnd.ms-excel', 'application/vnd.ms-office', 'application/vnd.ms-powerpoint'].index(mime) && office_extension
+    if ['application/zip', 'application/vnd.ms-excel', 'application/vnd.ms-office', 'application/vnd.ms-powerpoint', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'application/vnd.ms-word.document.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.wordprocessingml.template', 'application/vnd.ms-word.template.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'application/vnd.ms-excel.sheet.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.spreadsheetml.template', 'application/vnd.ms-excel.template.macroEnabled.12', 'application/vnd.ms-excel.sheet.binary.macroEnabled.12', 'application/vnd.ms-excel.addin.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.presentationml.presentation', 'application/vnd.ms-powerpoint.presentation.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.presentationml.slideshow', 'application/vnd.ms-powerpoint.slideshow.macroEnabled.12', 'application/vnd.openxmlformats-officedocument.presentationml.template', 'application/vnd.ms-powerpoint.template.macroEnabled.12'].index(mime) && office_extension
       extracted = true
       office_extension = office_extension[0].gsub(/x$/, '')
       tempfile = Tempfile.new(['temp', '.' + office_extension])
@@ -69,6 +69,7 @@ class SeminarSessionsController < ApplicationController
 
         begin
           File.unlink(tempfile_pdf_path) if File.exist?(tempfile_pdf_path)
+        rescue
         end
       ensure
         tempfile.unlink
