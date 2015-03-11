@@ -7,6 +7,10 @@
     .infobar
       span
         | ここにお知らせ等が表示されます。
+    .comment-input-container
+      textarea placeholder="コメントを入力してください。"
+      a.btn-send-comment 送信する
+      a.btn-cancel-comment やめる
     .slide-container
       .slide
         - slides = JSON.parse(@seminar_session.slide_status_json)
@@ -18,7 +22,7 @@
       .slide-controller
         .btn.btn-xs 理解
         .btn.btn-xs 同期の停止
-        .btn.btn-xs コメントする
+        .btn.btn-xs#btn-toggle-comment-input コメントする
         .btn.btn-xs#btn-toggle-comment コメントを隠す
 
       .comment-container
@@ -85,4 +89,7 @@ coffee:
   )
   $('#btn-toggle-comment').on('click', ->
     toggleCommentList($('.comment-container').css('x') == '100%')
+  )
+  $('#btn-toggle-comment-input').on('click', ->
+    toggleCommentInput($('.comment-input-container').css('height') == '0px')
   )

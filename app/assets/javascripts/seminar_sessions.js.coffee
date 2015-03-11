@@ -36,3 +36,11 @@
   else
     $('#btn-toggle-comment').text('コメントを表示する')
 
+
+@toggleCommentInput = (show = true) ->
+  $('.comment-input-container').transit({ height: (if show then '80px' else 0) }, 300)
+  if show
+    $('#btn-toggle-comment-input').text('コメントをやめる')
+  else
+    $('#btn-toggle-comment-input').text('コメントする')
+
