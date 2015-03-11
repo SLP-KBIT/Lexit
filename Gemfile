@@ -60,3 +60,4 @@ gem 'byebug'
 
 gem 'websocket-rails'
 gem 'ruby-filemagic'
+gem 'jquery-datetimepicker-rails'

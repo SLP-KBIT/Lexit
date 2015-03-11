@@ -4,6 +4,9 @@ h1 セッション編集
   .form-group
     = f.label :title
     = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :date
+    = f.text_field :date, class: 'form-control datetimepicker'
   - if @seminar_session.presenter?(current_user)
     .form-group
       = f.label :slide
@@ -15,3 +18,6 @@ h1 セッション編集
       = f.label :answer
       = f.file_field :answer
   = f.submit '更新', class: 'btn btn-primary'
+
+javascript:
+  $('.datetimepicker').datetimepicker();
