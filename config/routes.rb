@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   resources :preparations
   get 'seminar_sessions/:id/download/:type' => 'seminar_sessions#download', as: 'seminar_session_download'
   get 'preparations/:id/list/' => 'preparations#edit_list', as: 'edit_preparation_list'
+  post 'preparations/:id/list/' => 'preparations#update_list', as: 'update_preparation_list'
 end
