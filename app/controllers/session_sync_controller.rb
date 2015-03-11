@@ -20,8 +20,7 @@ class SessionSyncController < WebsocketRails::BaseController
     @channel.make_private unless @channel.is_private?
 
     accept_channel(user: current_user.schema)
-    presentator = false
-    presentator = true if @seminar_session.user_id == current_user.id
+    presentator = (@seminar_session.user_id == current_user.id)
     @channel.trigger :notify_enter, user: current_user.schema, presentator: presentator
   end
 
@@ -29,8 +28,7 @@ class SessionSyncController < WebsocketRails::BaseController
 
   def authenticate_user_and_channel
     # TODO: セッションに参加しているユーザかどうかを判定し、deny or accept 処理を行う。
-    return false unless message[:user]
-    return false if message[:user][:id].to_i != current_user.id
+    return false if message[:user] && message[:user][:id].to_i != current_user.id
     seminar_session_id = message[:channel].gsub(/session/, '').to_i
     @seminar_session = SeminarSession.find(seminar_session_id)
     return false unless @seminar_session
