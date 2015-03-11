@@ -8,11 +8,6 @@
       span
         | ここにお知らせ等が表示されます。
     .slide-container
-      .slide-controller
-        .btn.btn-xs 理解
-        .btn.btn-xs 同期の停止
-        .btn.btn-xs コメントする
-        .btn.btn-xs コメントを隠す
       .slide
         - slides = JSON.parse(@seminar_session.slide_status_json)
         - image_path = File.dirname(@seminar_session.slide.url)
@@ -20,6 +15,11 @@
         - slides.keys.each do |file|
           = image_tag image_path + '/pages/' + file, 'data-slide-no' => i, class: (i == 0 ? '' : 'hide')
           - i += 1
+      .slide-controller
+        .btn.btn-xs 理解
+        .btn.btn-xs 同期の停止
+        .btn.btn-xs コメントする
+        .btn.btn-xs#btn-toggle-comment コメントを隠す
 
       .comment-container
         .tab
@@ -69,7 +69,7 @@ input type="hidden" name="session_id" value=( @seminar_session.id )
 
 coffee:
   syncSessionClass.enterSession($('input[name=session_id]').val())
-  $('.tab-btn').on( 'click', ->
+  $('.tab-btn').on('click', ->
     if $(this).attr('data-target') == 'member'
       $('ul.member').show()
       $('ul.comment').hide()
@@ -82,4 +82,7 @@ coffee:
   $(window).on('onbeforeunload page:before-change', ->
     syncSessionClass.leave()
     $(window).unbind('onbeforeunload page:before-change')
+  )
+  $('#btn-toggle-comment').on('click', ->
+    toggleCommentList($('.comment-container').css('x') == '100%')
   )

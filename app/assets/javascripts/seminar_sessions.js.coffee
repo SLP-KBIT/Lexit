@@ -17,6 +17,7 @@
       $($('.slide img')[index + 1]).removeClass('hide')
       break
 
+
 @slideToPrev = ->
   for img, index in $('.slide img')
     continue if 0 == index
@@ -24,4 +25,14 @@
       $(img).addClass('hide')
       $($('.slide img')[index - 1]).removeClass('hide')
       break
+
+
+@toggleCommentList = (show = true) ->
+  $('.comment-container').transit({ x: (if show then 0 else '100%') }, 300)
+  $('.slide').transit({ width: (if show then '80%' else '100%') }, 300)
+  $('.slide-controller').transit({ right: (if show then '20%' else 0) }, 300)
+  if show
+    $('#btn-toggle-comment').text('コメントを隠す')
+  else
+    $('#btn-toggle-comment').text('コメントを表示する')
 

@@ -3,13 +3,14 @@
 $slide-height: 500px
 
 .seminar-session-container
+  overflow: hidden
   h1
     font-size: 24px
     color: #333
     border-left: 24px rgb(252, 212, 238) solid
     padding-left: 10px
     line-height: 24px
-    margin: 14px 2px 10px 2px
+    margin: 14px 0 10px 0
 
   h2
     font-size: 18px
@@ -18,13 +19,13 @@ $slide-height: 500px
     @include border-radius( 4px )
     @include box-shadow( 1px 1px rgb(219, 219, 219) )
     width: 100%
-    margin: 6px 2px
+    margin: 6px 0
     font-weight: bold
 
   .session-container
     border: 1px solid #ccc
     @include border-radius( 4px )
-    margin: 0 2px
+    margin: 0
     width: 100%
 
     .infobar
@@ -40,6 +41,7 @@ $slide-height: 500px
       width: 100%
       display: block
       position: relative
+      height: $slide-height
 
       .slide-controller
         position: absolute
@@ -53,7 +55,8 @@ $slide-height: 500px
       .slide
         width: 80%
         box-sizing: border-box
-        float: left
+        position: absolute
+        left: 0
         height: $slide-height
         text-align: center
         background-color: black
@@ -65,10 +68,12 @@ $slide-height: 500px
           height: $slide-height - 20px
 
       .comment-container
+        overflow: hidden
         display: inline-block
         box-sizing: border-box
+        position: absolute
+        right: 0
         width: 20%
-        float: right
         height: $slide-height - 20px
 
         .tab
