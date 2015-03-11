@@ -19,6 +19,8 @@
       currentIndex = index + 2
       break
   $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
+  if window.presentator
+    syncSessionClass.sendPage(currentIndex)
 
 
 @slideToPrev = ->
@@ -31,6 +33,8 @@
       currentIndex = index
       break
   $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
+  if window.presentator
+    syncSessionClass.sendPage(currentIndex)
 
 
 @showSlideController = ->

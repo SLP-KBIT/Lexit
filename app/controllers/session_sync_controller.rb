@@ -11,6 +11,11 @@ class SessionSyncController < WebsocketRails::BaseController
     @channel.trigger :notify_leave, user: current_user.schema
   end
 
+  def set_slide
+    return unless authenticate_user_and_channel
+    @channel.trigger :set_slide, page: message[:page]
+  end
+
   def authorize_channels
     if current_user.nil? || !authenticate_user_and_channel
       deny_channel(message: 'Unauthorized.')

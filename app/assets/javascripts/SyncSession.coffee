@@ -45,6 +45,7 @@ class @SyncSession
       console.log('Connected to session: [' + session_id + ']')
       @sessions[ session_id ].bind 'notify_enter', @onEnter
       @sessions[ session_id ].bind 'notify_leave', @onLeave
+      @sessions[ session_id ].bind 'set_slide', @onSetSlide
     @sessions[ session_id ].on_failure = ( reason ) ->
       console.log JSON.stringify( reason )
       if reason.message == 'Unauthorized.'
@@ -62,8 +63,10 @@ class @SyncSession
     addMember(e.user, e.presentator)
     if e.user.id == window.user_id && e.presentator
       showSlideController()
+      window.presentator = true
     else
       hideSlideController()
+      window.presentator = false
 
   onLeave: (e) =>
     removeMember(e.user)
@@ -71,8 +74,15 @@ class @SyncSession
       @dispatcher.unsubscribe( 'session' + @currentSessionId )
       @sessions[@currentSessionId] = null
 
-  leave: =>
-    @sessions[@currentSessionId].trigger("notify_leave",{ user: { id: window.user_id } })
+  onSetSlide: (e) =>
+    $('.slide > img').addClass('hide')
+    $($('.slide > img')[e.page - 1]).removeClass('hide')
+    $('.slide-info').text(e.page + '/' + $('.slide > img').length)
 
+  leave: =>
+    @sessions[@currentSessionId].trigger('notify_leave', { user: { id: window.user_id } })
+
+  sendPage: (page) =>
+    @sessions[@currentSessionId].trigger('set_slide', { user: { id: window.user_id }, page: page })
 
 window.syncSessionClass = new SyncSession(window.location.host + '/websocket')
