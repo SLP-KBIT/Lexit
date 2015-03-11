@@ -42,6 +42,7 @@
     $('#btn-toggle-comment').text('コメントを隠す')
   else
     $('#btn-toggle-comment').text('コメントを表示する')
+  setTimeout( @adjustSlideSize, 350 )
 
 
 @toggleCommentInput = (show = true) ->
@@ -56,7 +57,7 @@
   return if $('.slide img').length <= 0
   slide_w = $('.slide img').width()
   container_w = $('.slide').width()
-  if container_w <= 700
+  if container_w <= 640
     slide_h = $('.slide img').height()
     slide_h = slide_h * ( container_w / slide_w )
     $('.slide img').width(container_w)
