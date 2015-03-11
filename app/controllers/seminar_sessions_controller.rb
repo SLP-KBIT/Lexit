@@ -97,17 +97,17 @@ class SeminarSessionsController < ApplicationController
       end
     end
 
-    if extracted
-      # save extracted files information to JSON
-      files = Dir.glob(Rails.root.to_s + '/public/uploads/seminar_session/' + type + '/' + @seminar_session.id.to_s + '/pages/*').sort
-      files.map! do |file_path|
-        File.basename(file_path)
-      end
-      files_status = {}
-      files.each do |file|
-        files_status[file] = 'open'
-      end
-      @seminar_session.slide_status_json = JSON.generate(files_status)
+    return unless extracted
+
+    # save extracted files information to JSON
+    files = Dir.glob(Rails.root.to_s + '/public/uploads/seminar_session/' + type + '/' + @seminar_session.id.to_s + '/pages/*').sort
+    files.map! do |file_path|
+      File.basename(file_path)
     end
+    files_status = {}
+    files.each do |file_name|
+      files_status[file_name] = 'open'
+    end
+    @seminar_session.slide_status_json = JSON.generate(files_status)
   end
 end

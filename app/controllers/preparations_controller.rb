@@ -27,11 +27,7 @@ class PreparationsController < ApplicationController
     list = @preparation.prep_list
     list.each do |column, value|
       value.keys.each do |item|
-        if preparation_params[column].nil? || preparation_params[column][item].nil?
-          list[column][item] = false
-        else
-          list[column][item] = true
-        end
+        list[column][item] = !(preparation_params[column].nil? || preparation_params[column][item].nil?)
       end
     end
   end
