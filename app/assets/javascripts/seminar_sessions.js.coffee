@@ -54,18 +54,18 @@
 
 
 @adjustSlideSize = ->
-  return if $('.slide img').length <= 0
-  slide_w = $('.slide img').width()
+  return if $('.slide > img').length <= 0
+  slide_w = $('.slide > img').width()
   container_w = $('.slide').width()
   if container_w <= 640
-    slide_h = $('.slide img').height()
+    slide_h = $('.slide > img').height()
     slide_h = slide_h * ( container_w / slide_w )
-    $('.slide img').width(container_w)
-    $('.slide img').height(slide_h)
+    $('.slide > img').width(container_w)
+    $('.slide > img').height(slide_h)
     pad_h = ( $('.slide').outerHeight() - slide_h ) / 2
     $('.slide').css('padding', pad_h + 'px 0')
   else
-    $('.slide img').width('auto').height('480px')
+    $('.slide > img').width('auto').height('480px')
     $('.slide').css('padding', '10px 0')
 
 $(window).on('resize', @adjustSlideSize)
