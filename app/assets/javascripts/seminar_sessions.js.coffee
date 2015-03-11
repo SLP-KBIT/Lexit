@@ -10,21 +10,34 @@
 
 
 @slideToNext = ->
-  for img, index in $('.slide img')
-    break if $('.slide img').length - 1 == index
+  currentIndex = $('.slide > img').length
+  for img, index in $('.slide > img')
+    break if $('.slide > img').length - 1 == index
     if $(img).css('display') != 'none'
       $(img).addClass('hide')
-      $($('.slide img')[index + 1]).removeClass('hide')
+      $($('.slide > img')[index + 1]).removeClass('hide')
+      currentIndex = index + 2
       break
+  $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
 
 
 @slideToPrev = ->
-  for img, index in $('.slide img')
+  currentIndex = 1
+  for img, index in $('.slide > img')
     continue if 0 == index
     if $(img).css('display') != 'none'
       $(img).addClass('hide')
-      $($('.slide img')[index - 1]).removeClass('hide')
+      $($('.slide > img')[index - 1]).removeClass('hide')
+      currentIndex = index
       break
+  $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
+
+
+@showSlideController = ->
+  $('.btn-slide-next,.btn-slide-prev').show()
+
+@hideSlideController = ->
+  $('.btn-slide-next,.btn-slide-prev').hide()
 
 
 @toggleCommentList = (show = true) ->
@@ -35,4 +48,33 @@
     $('#btn-toggle-comment').text('コメントを隠す')
   else
     $('#btn-toggle-comment').text('コメントを表示する')
+  setTimeout( @adjustSlideSize, 350 )
+
+
+@toggleCommentInput = (show = true) ->
+  $('.comment-input-container').transit({ height: (if show then '80px' else 0) }, 300)
+  if show
+    $('#btn-toggle-comment-input').text('コメントをやめる')
+  else
+    $('#btn-toggle-comment-input').text('コメントする')
+
+
+@adjustSlideSize = ->
+  return if $('.slide > img').length <= 0
+  slide_w = $('.slide > img').width()
+  container_w = $('.slide').width()
+  if container_w <= 640
+    slide_h = $('.slide > img').height()
+    slide_h = slide_h * ( container_w / slide_w )
+    $('.slide > img').width(container_w)
+    $('.slide > img').height(slide_h)
+    pad_h = ( $('.slide').outerHeight() - slide_h ) / 2
+    $('.slide').css('padding', pad_h + 'px 0')
+  else
+    $('.slide > img').width('auto').height('480px')
+    $('.slide').css('padding', '10px 0')
+
+$(window).on('resize', @adjustSlideSize)
+$(window).on('load page:load', @adjustSlideSize)
+
 

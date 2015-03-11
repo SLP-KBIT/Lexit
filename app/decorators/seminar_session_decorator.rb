@@ -17,4 +17,8 @@ class SeminarSessionDecorator < Draper::Decorator
     return 'タイトル未定' if object.title.blank?
     object.title
   end
+
+  def slide_status
+    JSON.parse(slide_status_json)
+  end
 end
