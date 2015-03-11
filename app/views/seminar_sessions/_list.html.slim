@@ -13,13 +13,14 @@ h2 セッション一覧
           th 日程
           td = s.decorate.date
         tr
-          td
-            .btn-group
-              = link_to '準備状況', preparation_path(id: s.preparation.id), class: 'btn btn-primary'
-              = link_to 'セッション開始', seminar_session_path(s), class: 'btn btn-info'
+          td[colspan="2"]
+            .div
+              .btn-group
+                = link_to '準備状況', preparation_path(id: s.preparation.id), class: 'btn btn-primary'
+                = link_to 'セッション開始', seminar_session_path(s), class: 'btn btn-info'
         - if @seminar_project.owner?(current_user) || s.presenter?(current_user)
           tr
-            td
+            td.conpact-cell
               = link_to '編集', edit_seminar_session_path(s), class: 'btn btn-primary'
             - if @seminar_project.owner?(current_user)
               td

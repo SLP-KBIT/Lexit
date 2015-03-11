@@ -22,4 +22,4 @@ config/database.yml
 
 vendor/bundle
 *.swp
-public/uploads/
+public/uploads
