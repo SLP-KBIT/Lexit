@@ -10,21 +10,27 @@
 
 
 @slideToNext = ->
-  for img, index in $('.slide img')
-    break if $('.slide img').length - 1 == index
+  currentIndex = $('.slide > img').length
+  for img, index in $('.slide > img')
+    break if $('.slide > img').length - 1 == index
     if $(img).css('display') != 'none'
       $(img).addClass('hide')
-      $($('.slide img')[index + 1]).removeClass('hide')
+      $($('.slide > img')[index + 1]).removeClass('hide')
+      currentIndex = index + 2
       break
+  $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
 
 
 @slideToPrev = ->
-  for img, index in $('.slide img')
+  currentIndex = 1
+  for img, index in $('.slide > img')
     continue if 0 == index
     if $(img).css('display') != 'none'
       $(img).addClass('hide')
-      $($('.slide img')[index - 1]).removeClass('hide')
+      $($('.slide > img')[index - 1]).removeClass('hide')
+      currentIndex = index
       break
+  $('.slide-info').text(currentIndex + '/' + $('.slide > img').length)
 
 
 @showSlideController = ->
@@ -70,3 +76,5 @@
 
 $(window).on('resize', @adjustSlideSize)
 $(window).on('load page:load', @adjustSlideSize)
+
+

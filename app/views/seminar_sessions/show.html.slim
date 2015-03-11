@@ -99,3 +99,5 @@ coffee:
   $('#btn-toggle-comment-input').on('click', ->
     toggleCommentInput($('.comment-input-container').css('height') == '0px')
   )
+  $('.btn-slide-next').on('click', @slideToNext)
+  $('.btn-slide-prev').on('click', @slideToPrev)
