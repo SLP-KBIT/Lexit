@@ -5,6 +5,7 @@ class PreparationsController < ApplicationController
   end
 
   def update
+    @preparation.practice = params['preparation']['practice']
     @preparation.update(update_params)
     redirect_to preparation_path(@preparation)
   end

@@ -53,3 +53,9 @@ table.table.preparation-table
           tr
             td
               = link_to '資料ダウンロード', seminar_session_download_path(id: @preparation.seminar_session.id, type: 'resume')
+  tr
+    th.conpact-cell 練習
+    - if @preparation.practice == 0
+      td.warning = @preparation.practice
+    - else
+      td.success = @preparation.practice

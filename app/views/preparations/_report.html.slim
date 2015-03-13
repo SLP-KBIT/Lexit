@@ -34,4 +34,10 @@ h1 進捗報告ページ
             tr
               td
                 label = check_box('material', "#{part}", {checked: flag}, true, false) + ' ' + part
+    tr
+      th 発表練習
+      td
+        = number_field :preparation, :practice
   = submit_tag '報告する', class: 'btn btn-primary'
+  = " "
+  button.btn.btn-danger 行き詰まり報告

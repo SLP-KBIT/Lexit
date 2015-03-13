@@ -63,14 +63,12 @@ table.table.table-striped
 .panel.panel-default
   .panel-heading コメント
   .panel-body
-    = form_for @comment do |f|
+    = form_for @comment, html: { class: "form-inline" } do |f|
       = f.hidden_field :target, value: Comment::Target::PROJECT
       = f.hidden_field :target_id, value: @seminar_project.id
-      .row
-        .col-md-7
-          .form-group
-            = f.text_field :content, class: "form-control comment-form"
-        = f.submit "投稿", class: "btn btn-default"
+      .form-group
+        = f.text_field :content, class: "form-control comment-form"
+      = f.submit "投稿", class: "btn btn-default"
     table.table
       - @seminar_project.comments.each do |c|
         tr

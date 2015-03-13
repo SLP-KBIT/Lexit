@@ -11,13 +11,13 @@
     tbody
       - projects.each do |project|
         tr
-          td = link_to project.title, seminar_project_path(project)
-          td
+          td.conpact-cell = link_to project.title, seminar_project_path(project)
+          td.conpact-cell
             h2.book-title class=( project.books.count <= 0 || project.books.first.name.blank? ? 'error' : '' )
               = project.decorate.book_name
             .description
               = raw project.decorate.description
-          td = project.owner.decorate.name
+          td.conpact-cell = project.owner.decorate.name
           td = link_to "詳細", seminar_project_path(project), class: "btn btn-primary"
   - if type == :plan
     - extra_params = { 'initiate_page' => params[:initiate_page] }
