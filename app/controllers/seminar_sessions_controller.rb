@@ -1,4 +1,5 @@
 class SeminarSessionsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_project, :load_session
 
   def show

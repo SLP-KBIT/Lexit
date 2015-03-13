@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_entry
   def create
     @entry.destroy unless @entry.nil?

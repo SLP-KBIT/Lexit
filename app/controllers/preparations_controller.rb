@@ -1,4 +1,5 @@
 class PreparationsController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_preparation
 
   def show
