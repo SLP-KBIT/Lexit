@@ -63,7 +63,7 @@ table.table.table-striped
 .panel.panel-default
   .panel-heading コメント
   .panel-body
-    = form_for @comment, html: { class: "form-inline" } do |f|
+    = form_for @project_comment, html: { class: "form-inline" } do |f|
       = f.hidden_field :target, value: Comment::Target::PROJECT
       = f.hidden_field :target_id, value: @seminar_project.id
       .form-group

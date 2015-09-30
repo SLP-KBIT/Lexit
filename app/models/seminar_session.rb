@@ -54,4 +54,8 @@ class SeminarSession < ActiveRecord::Base
     return answer if type == 'answer'
     nil
   end
+
+  def comments
+    Comment.where(target: Comment::Target::SESSION, target_id: id)
+  end
 end

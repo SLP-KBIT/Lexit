@@ -16,6 +16,7 @@ class Comment < ActiveRecord::Base
 
   module Target
     PROJECT = 0
-    SESSION = 100
+    SESSION = 50
+    SESSION_SLIDE = 100
   end
 end

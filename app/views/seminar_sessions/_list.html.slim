@@ -26,3 +26,24 @@ h2 セッション一覧
               td
                 = modal_toggle '発表者選択', dialog: "#presenterModal#{s.id}", class: 'btn btn-warning'
                 = render 'seminar_sessions/presenter_modal', seminar_session: s
+
+      #accordion.panel-group[role="tablist" aria-multiselectable="true"]
+        .panel.panel-default
+          #headingOne.panel-heading[role="tab"]
+            h4.panel-title
+              a[role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne"]
+                |  コメント
+          #collapseOne.panel-collapse.collapse[role="tabpanel" aria-labelledby="headingOne"]
+            .panel-body
+              = form_for @session_comment, html: { class: "form-inline" } do |f|
+                = f.hidden_field :target, value: Comment::Target::SESSION
+                = f.hidden_field :target_id, value: s.id
+                .form-group
+                  = f.text_field :content, class: "form-control comment-form"
+                = f.submit "投稿", class: "btn btn-default"
+              table.table
+                - s.comments.each do |c|
+                  - c = c.decorate
+                  tr
+                    th.conpact-cell = c.user.nick_name + " >"
+                    td = c.session_comment

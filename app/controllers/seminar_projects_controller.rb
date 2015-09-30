@@ -26,7 +26,8 @@ class SeminarProjectsController < ApplicationController
 
   def show
     @entry = current_user.entries.where(seminar_project_id: @seminar_project.id).first
-    @comment = Comment.new(user_id: current_user.id, target: Comment::Target::PROJECT, target_id: @seminar_project.id)
+    @project_comment = Comment.new(user_id: current_user.id, target: Comment::Target::PROJECT, target_id: @seminar_project.id)
+    @session_comment = Comment.new(user_id: current_user.id, target: Comment::Target::SESSION)
   end
 
   def edit
