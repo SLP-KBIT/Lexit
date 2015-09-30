@@ -7,7 +7,6 @@ describe SeminarProject, type: :model do
     end
     it '2つのseminar_sessionsが生成される' do
       @project.determine_with_session(2)
-      byebug
       expect(@project.seminar_sessions.count).to eq 2
     end
   end

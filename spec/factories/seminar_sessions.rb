@@ -21,6 +21,5 @@
 
 FactoryGirl.define do
   factory :seminar_session do
-
   end
 end

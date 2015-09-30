@@ -17,6 +17,5 @@
 
 FactoryGirl.define do
   factory :seminar_project do
-
   end
 end
