@@ -9,9 +9,7 @@ class SeminarSessionsController < ApplicationController
   end
 
   def create
-    # s = @seminar_project.seminar_sessions.build
-    # s.save!
-    create_with_preparation
+    @seminar_project.seminar_sessions.create
     redirect_to seminar_project_path(@seminar_project)
   end
 
@@ -26,13 +24,6 @@ class SeminarSessionsController < ApplicationController
   end
 
   private
-
-  def create_with_preparation
-    seminar_session = @seminar_project.seminar_sessions.build
-    preparation = seminar_session.prepare_preparation
-    preparation.save!
-    seminar_session.save!
-  end
 
   def session_params
     params.require(:seminar_session).permit(

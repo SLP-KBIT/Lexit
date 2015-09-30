@@ -47,6 +47,7 @@ class SeminarProjectsController < ApplicationController
   def determine
     @seminar_project.project_status = SeminarProject::ProjectStatus::PLANNING
     @seminar_project.save!
+    @seminar_project.determine_with_session(params['seminar_session']['number'].to_i)
     redirect_to seminar_project_path(@seminar_project), notice: 'プロジェクトを確定しました'
   end
 

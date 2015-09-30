@@ -55,6 +55,12 @@ class SeminarSession < ActiveRecord::Base
     nil
   end
 
+  def create
+    super
+    preparation = prepare_preparation
+    preparation.save!
+  end
+
   def comments
     Comment.where(target: Comment::Target::SESSION, target_id: id)
   end

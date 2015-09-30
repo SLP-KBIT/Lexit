@@ -57,6 +57,12 @@ class SeminarProject < ActiveRecord::Base
     first_book.save!
   end
 
+  def determine_with_session(time)
+    time.times do
+      seminar_sessions.create
+    end
+  end
+
   def comments
     Comment.where(target: Comment::Target::PROJECT, target_id: id)
   end
