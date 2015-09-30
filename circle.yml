@@ -1,6 +1,7 @@
 test:
   override:
     - "bundle exec bin/rubocop_parallel": { parallel: true }
+    - "bundle exec rspec"
 machine:
   ruby:
     version: 2.1.1
