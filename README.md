@@ -1,3 +1,7 @@
+# Lexit
+
+[![Circle CI](https://circleci.com/gh/SLP-KBIT/Lexit.svg?style=shield)](https://circleci.com/gh/SLP-KBIT/Lexit)
+
 * Requires
 
 ```
